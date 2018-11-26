@@ -45,6 +45,11 @@
         <include refid="selectJobVo"/>
     </select>
 
+    <select id="selectAllActiveJob" resultMap="JobResult">
+        <include refid="selectJobVo"/>
+        where status = '0'
+    </select>
+
     <select id="selectJobById" parameterType="Long" resultMap="JobResult">
         <include refid="selectJobVo"/>
         where job_id = #{jobId}

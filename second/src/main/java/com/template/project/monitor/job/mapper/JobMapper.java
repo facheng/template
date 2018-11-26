@@ -68,4 +68,11 @@ public interface JobMapper {
      * @return 结果
      */
     public int insertJob(Job job);
+
+    /**
+     * 获取可执行的job
+     *
+     * @return 结果
+     */
+    List<Job> selectAllActiveJob();
 }
