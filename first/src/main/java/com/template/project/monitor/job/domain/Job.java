@@ -11,8 +11,7 @@ import com.template.framework.web.domain.BaseEntity;
  * 定时任务调度信息 sys_job
  * 
  */
-public class Job extends BaseEntity implements Serializable
-{
+public class Job extends BaseEntity implements Serializable {
     private static final long serialVersionUID = 1L;
 
     /** 任务ID */
@@ -47,102 +46,78 @@ public class Job extends BaseEntity implements Serializable
     @Excel(name = "任务状态", readConverterExp = "0=正常,1=暂停")
     private String status;
 
-    public Long getJobId()
-    {
+    public Long getJobId() {
         return jobId;
     }
 
-    public void setJobId(Long jobId)
-    {
+    public void setJobId(Long jobId) {
         this.jobId = jobId;
     }
 
-    public String getJobName()
-    {
+    public String getJobName() {
         return jobName;
     }
 
-    public void setJobName(String jobName)
-    {
+    public void setJobName(String jobName) {
         this.jobName = jobName;
     }
 
-    public String getJobGroup()
-    {
+    public String getJobGroup() {
         return jobGroup;
     }
 
-    public void setJobGroup(String jobGroup)
-    {
+    public void setJobGroup(String jobGroup) {
         this.jobGroup = jobGroup;
     }
 
-    public String getMethodName()
-    {
+    public String getMethodName() {
         return methodName;
     }
 
-    public void setMethodName(String methodName)
-    {
+    public void setMethodName(String methodName) {
         this.methodName = methodName;
     }
 
-    public String getMethodParams()
-    {
+    public String getMethodParams() {
         return methodParams;
     }
 
-    public void setMethodParams(String methodParams)
-    {
+    public void setMethodParams(String methodParams) {
         this.methodParams = methodParams;
     }
 
-    public String getCronExpression()
-    {
+    public String getCronExpression() {
         return cronExpression;
     }
 
-    public void setCronExpression(String cronExpression)
-    {
+    public void setCronExpression(String cronExpression) {
         this.cronExpression = cronExpression;
     }
 
-    public String getMisfirePolicy()
-    {
+    public String getMisfirePolicy() {
         return misfirePolicy;
     }
 
-    public void setMisfirePolicy(String misfirePolicy)
-    {
+    public void setMisfirePolicy(String misfirePolicy) {
         this.misfirePolicy = misfirePolicy;
     }
 
-    public String getStatus()
-    {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(String status)
-    {
+    public void setStatus(String status) {
         this.status = status;
     }
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
-            .append("jobId", getJobId())
-            .append("jobName", getJobName())
-            .append("jobGroup", getJobGroup())
-            .append("methodName", getMethodName())
-            .append("methodParams", getMethodParams())
-            .append("cronExpression", getCronExpression())
-            .append("misfirePolicy", getMisfirePolicy())
-            .append("status", getStatus())
-            .append("createBy", getCreateBy())
-            .append("createTime", getCreateTime())
-            .append("updateBy", getUpdateBy())
-            .append("updateTime", getUpdateTime())
-            .append("remark", getRemark())
-            .toString();
+        return new ToStringBuilder(this, ToStringStyle.MULTI_LINE_STYLE).append("jobId", getJobId())
+                .append("jobName", getJobName()).append("jobGroup", getJobGroup()).append("methodName", getMethodName())
+                .append("methodParams", getMethodParams()).append("cronExpression", getCronExpression())
+                .append("misfirePolicy", getMisfirePolicy()).append("status", getStatus())
+                .append("createBy", getCreateBy()).append("createTime", getCreateTime())
+                .append("updateBy", getUpdateBy()).append("updateTime", getUpdateTime()).append("remark", getRemark())
+                .toString();
     }
 }

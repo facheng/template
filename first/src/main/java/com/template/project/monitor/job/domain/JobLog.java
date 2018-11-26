@@ -9,8 +9,7 @@ import com.template.framework.web.domain.BaseEntity;
  * 定时任务调度日志表 sys_job_log
  * 
  */
-public class JobLog extends BaseEntity
-{
+public class JobLog extends BaseEntity {
     private static final long serialVersionUID = 1L;
 
     /** ID */
@@ -45,98 +44,76 @@ public class JobLog extends BaseEntity
     @Excel(name = "异常信息")
     private String exceptionInfo;
 
-    public Long getJobLogId()
-    {
+    public Long getJobLogId() {
         return jobLogId;
     }
 
-    public void setJobLogId(Long jobLogId)
-    {
+    public void setJobLogId(Long jobLogId) {
         this.jobLogId = jobLogId;
     }
 
-    public String getJobName()
-    {
+    public String getJobName() {
         return jobName;
     }
 
-    public void setJobName(String jobName)
-    {
+    public void setJobName(String jobName) {
         this.jobName = jobName;
     }
 
-    public String getJobGroup()
-    {
+    public String getJobGroup() {
         return jobGroup;
     }
 
-    public void setJobGroup(String jobGroup)
-    {
+    public void setJobGroup(String jobGroup) {
         this.jobGroup = jobGroup;
     }
 
-    public String getMethodName()
-    {
+    public String getMethodName() {
         return methodName;
     }
 
-    public void setMethodName(String methodName)
-    {
+    public void setMethodName(String methodName) {
         this.methodName = methodName;
     }
 
-    public String getMethodParams()
-    {
+    public String getMethodParams() {
         return methodParams;
     }
 
-    public void setMethodParams(String methodParams)
-    {
+    public void setMethodParams(String methodParams) {
         this.methodParams = methodParams;
     }
 
-    public String getJobMessage()
-    {
+    public String getJobMessage() {
         return jobMessage;
     }
 
-    public void setJobMessage(String jobMessage)
-    {
+    public void setJobMessage(String jobMessage) {
         this.jobMessage = jobMessage;
     }
 
-    public String getStatus()
-    {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(String status)
-    {
+    public void setStatus(String status) {
         this.status = status;
     }
 
-    public String getExceptionInfo()
-    {
+    public String getExceptionInfo() {
         return exceptionInfo;
     }
 
-    public void setExceptionInfo(String exceptionInfo)
-    {
+    public void setExceptionInfo(String exceptionInfo) {
         this.exceptionInfo = exceptionInfo;
     }
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
-            .append("jobLogId", getJobLogId())
-            .append("jobName", getJobName())
-            .append("jobGroup", getJobGroup())
-            .append("methodName", getMethodName())
-            .append("methodParams", getMethodParams())
-            .append("jobMessage", getJobMessage())
-            .append("status", getStatus())
-            .append("exceptionInfo", getExceptionInfo())
-            .append("createTime", getCreateTime())
-            .toString();
+        return new ToStringBuilder(this, ToStringStyle.MULTI_LINE_STYLE).append("jobLogId", getJobLogId())
+                .append("jobName", getJobName()).append("jobGroup", getJobGroup()).append("methodName", getMethodName())
+                .append("methodParams", getMethodParams()).append("jobMessage", getJobMessage())
+                .append("status", getStatus()).append("exceptionInfo", getExceptionInfo())
+                .append("createTime", getCreateTime()).toString();
     }
 }

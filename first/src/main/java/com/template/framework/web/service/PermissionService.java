@@ -8,15 +8,13 @@ import org.springframework.stereotype.Service;
  * 
  */
 @Service("permission")
-public class PermissionService
-{
-    public String hasPermi(String permission)
-    {
+public class PermissionService {
+
+    public String hasPermi(String permission) {
         return isPermittedOperator(permission) ? "" : "hidden";
     }
 
-    private boolean isPermittedOperator(String permission)
-    {
+    private boolean isPermittedOperator(String permission) {
         return SecurityUtils.getSubject().isPermitted(permission);
     }
 

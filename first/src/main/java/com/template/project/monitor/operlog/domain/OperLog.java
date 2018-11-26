@@ -10,8 +10,7 @@ import com.template.framework.web.domain.BaseEntity;
  * 操作日志记录表 oper_log
  * 
  */
-public class OperLog extends BaseEntity
-{
+public class OperLog extends BaseEntity {
     private static final long serialVersionUID = 1L;
 
     /** 日志主键 */
@@ -70,163 +69,126 @@ public class OperLog extends BaseEntity
     @Excel(name = "操作时间", width = 30, dateFormat = "yyyy-MM-dd HH:mm:ss")
     private Date operTime;
 
-    public Long getOperId()
-    {
+    public Long getOperId() {
         return operId;
     }
 
-    public void setOperId(Long operId)
-    {
+    public void setOperId(Long operId) {
         this.operId = operId;
     }
 
-    public String getTitle()
-    {
+    public String getTitle() {
         return title;
     }
 
-    public void setTitle(String title)
-    {
+    public void setTitle(String title) {
         this.title = title;
     }
 
-    public Integer getBusinessType()
-    {
+    public Integer getBusinessType() {
         return businessType;
     }
 
-    public void setBusinessType(Integer businessType)
-    {
+    public void setBusinessType(Integer businessType) {
         this.businessType = businessType;
     }
 
-    public String getMethod()
-    {
+    public String getMethod() {
         return method;
     }
 
-    public void setMethod(String method)
-    {
+    public void setMethod(String method) {
         this.method = method;
     }
 
-    public Integer getOperatorType()
-    {
+    public Integer getOperatorType() {
         return operatorType;
     }
 
-    public void setOperatorType(Integer operatorType)
-    {
+    public void setOperatorType(Integer operatorType) {
         this.operatorType = operatorType;
     }
 
-    public String getOperName()
-    {
+    public String getOperName() {
         return operName;
     }
 
-    public void setOperName(String operName)
-    {
+    public void setOperName(String operName) {
         this.operName = operName;
     }
 
-    public String getDeptName()
-    {
+    public String getDeptName() {
         return deptName;
     }
 
-    public void setDeptName(String deptName)
-    {
+    public void setDeptName(String deptName) {
         this.deptName = deptName;
     }
 
-    public String getOperUrl()
-    {
+    public String getOperUrl() {
         return operUrl;
     }
 
-    public void setOperUrl(String operUrl)
-    {
+    public void setOperUrl(String operUrl) {
         this.operUrl = operUrl;
     }
 
-    public String getOperIp()
-    {
+    public String getOperIp() {
         return operIp;
     }
 
-    public void setOperIp(String operIp)
-    {
+    public void setOperIp(String operIp) {
         this.operIp = operIp;
     }
 
-    public String getOperLocation()
-    {
+    public String getOperLocation() {
         return operLocation;
     }
 
-    public void setOperLocation(String operLocation)
-    {
+    public void setOperLocation(String operLocation) {
         this.operLocation = operLocation;
     }
 
-    public String getOperParam()
-    {
+    public String getOperParam() {
         return operParam;
     }
 
-    public void setOperParam(String operParam)
-    {
+    public void setOperParam(String operParam) {
         this.operParam = operParam;
     }
 
-    public Integer getStatus()
-    {
+    public Integer getStatus() {
         return status;
     }
 
-    public void setStatus(Integer status)
-    {
+    public void setStatus(Integer status) {
         this.status = status;
     }
 
-    public String getErrorMsg()
-    {
+    public String getErrorMsg() {
         return errorMsg;
     }
 
-    public void setErrorMsg(String errorMsg)
-    {
+    public void setErrorMsg(String errorMsg) {
         this.errorMsg = errorMsg;
     }
 
-    public Date getOperTime()
-    {
+    public Date getOperTime() {
         return operTime;
     }
 
-    public void setOperTime(Date operTime)
-    {
+    public void setOperTime(Date operTime) {
         this.operTime = operTime;
     }
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
-            .append("operId", getOperId())
-            .append("title", getTitle())
-            .append("businessType", getBusinessType())
-            .append("method", getMethod())
-            .append("operatorType", getOperatorType())
-            .append("operName", getOperName())
-            .append("deptName", getDeptName())
-            .append("operUrl", getOperUrl())
-            .append("operIp", getOperIp())
-            .append("operLocation", getOperLocation())
-            .append("operParam", getOperParam())
-            .append("status", getStatus())
-            .append("errorMsg", getErrorMsg())
-            .append("operTime", getOperTime())
-            .toString();
+        return new ToStringBuilder(this, ToStringStyle.MULTI_LINE_STYLE).append("operId", getOperId())
+                .append("title", getTitle()).append("businessType", getBusinessType()).append("method", getMethod())
+                .append("operatorType", getOperatorType()).append("operName", getOperName())
+                .append("deptName", getDeptName()).append("operUrl", getOperUrl()).append("operIp", getOperIp())
+                .append("operLocation", getOperLocation()).append("operParam", getOperParam())
+                .append("status", getStatus()).append("errorMsg", getErrorMsg()).append("operTime", getOperTime())
+                .toString();
     }
 }

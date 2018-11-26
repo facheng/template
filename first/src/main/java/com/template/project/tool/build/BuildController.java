@@ -12,14 +12,12 @@ import com.template.framework.web.controller.BaseController;
  */
 @Controller
 @RequestMapping("/tool/build")
-public class BuildController extends BaseController
-{
+public class BuildController extends BaseController {
     private String prefix = "tool/build";
 
     @RequiresPermissions("tool:build:view")
     @GetMapping()
-    public String build()
-    {
+    public String build() {
         return prefix + "/build";
     }
 }

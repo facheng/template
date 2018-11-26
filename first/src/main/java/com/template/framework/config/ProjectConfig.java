@@ -9,8 +9,8 @@ import org.springframework.stereotype.Component;
  */
 @Component
 @ConfigurationProperties(prefix = "project")
-public class ProjectConfig
-{
+public class ProjectConfig {
+
     /** 项目名称 */
     private String name;
     /** 版本 */
@@ -22,63 +22,51 @@ public class ProjectConfig
     /** 获取地址开关 */
     private static boolean addressEnabled;
 
-    public String getName()
-    {
+    public String getName() {
         return name;
     }
 
-    public void setName(String name)
-    {
+    public void setName(String name) {
         this.name = name;
     }
 
-    public String getVersion()
-    {
+    public String getVersion() {
         return version;
     }
 
-    public void setVersion(String version)
-    {
+    public void setVersion(String version) {
         this.version = version;
     }
 
-    public String getCopyrightYear()
-    {
+    public String getCopyrightYear() {
         return copyrightYear;
     }
 
-    public void setCopyrightYear(String copyrightYear)
-    {
+    public void setCopyrightYear(String copyrightYear) {
         this.copyrightYear = copyrightYear;
     }
 
-    public static String getProfile()
-    {
+    public static String getProfile() {
         return profile;
     }
 
-    public void setProfile(String profile)
-    {
+    public void setProfile(String profile) {
         ProjectConfig.profile = profile;
     }
 
-    public static boolean isAddressEnabled()
-    {
+    public static boolean isAddressEnabled() {
         return addressEnabled;
     }
 
-    public void setAddressEnabled(boolean addressEnabled)
-    {
+    public void setAddressEnabled(boolean addressEnabled) {
         ProjectConfig.addressEnabled = addressEnabled;
     }
 
-    public static String getAvatarPath()
-    {
+    public static String getAvatarPath() {
         return profile + "avatar/";
     }
 
-    public static String getDownloadPath()
-    {
+    public static String getDownloadPath() {
         return profile + "download/";
     }
 }

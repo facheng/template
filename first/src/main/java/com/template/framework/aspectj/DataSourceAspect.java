@@ -21,36 +21,29 @@ import com.template.framework.datasource.DynamicDataSourceContextHolder;
 @Aspect
 @Order(1)
 @Component
-public class DataSourceAspect
-{
+public class DataSourceAspect {
     protected Logger logger = LoggerFactory.getLogger(getClass());
 
     @Pointcut("@annotation(com.template.framework.aspectj.lang.annotation.DataSource)")
-    public void dsPointCut()
-    {
+    public void dsPointCut() {
 
     }
 
     @Around("dsPointCut()")
-    public Object around(ProceedingJoinPoint point) throws Throwable
-    {
+    public Object around(ProceedingJoinPoint point) throws Throwable {
         MethodSignature signature = (MethodSignature) point.getSignature();
 
         Method method = signature.getMethod();
 
         DataSource dataSource = method.getAnnotation(DataSource.class);
 
-        if (StringUtils.isNotNull(dataSource))
-        {
+        if (StringUtils.isNotNull(dataSource)) {
             DynamicDataSourceContextHolder.setDateSoureType(dataSource.value().name());
         }
 
-        try
-        {
+        try {
             return point.proceed();
-        }
-        finally
-        {
+        } finally {
             // 销毁数据源 在执行方法之后
             DynamicDataSourceContextHolder.clearDateSoureType();
         }

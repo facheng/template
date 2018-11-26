@@ -4,8 +4,7 @@ package com.template.common.constant;
  * 通用常量信息
  * 
  */
-public class Constants
-{
+public class Constants {
     /**
      * UTF-8 字符集
      */

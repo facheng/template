@@ -8,10 +8,10 @@ create table QRTZ_JOB_DETAILS (
     job_group            varchar(200)    not null,
     description          varchar(250)    null,
     job_class_name       varchar(250)    not null,
-    is_durable           varchar(1)      not null,
-    is_nonconcurrent     varchar(1)      not null,
-    is_update_data       varchar(1)      not null,
-    requests_recovery    varchar(1)      not null,
+    is_durable           bool      not null,
+    is_nonconcurrent     bool      not null,
+    is_update_data       bool      not null,
+    requests_recovery    bool      not null,
     job_data             bytea            null,
     primary key (sched_name,job_name,job_group)
 )  ;
@@ -116,8 +116,8 @@ create table QRTZ_FIRED_TRIGGERS (
     state                varchar(16)     not null,
     job_name             varchar(200)    null,
     job_group            varchar(200)    null,
-    is_nonconcurrent     varchar(1)      null,
-    requests_recovery    varchar(1)      null,
+    is_nonconcurrent     BOOL      null,
+    requests_recovery    BOOL      null,
     primary key (sched_name,entry_id)
 )  ;
 
@@ -157,7 +157,31 @@ create table QRTZ_SIMPROP_TRIGGERS (
     long_prop_2          bigint          null,
     dec_prop_1           numeric(13,4)   null,
     dec_prop_2           numeric(13,4)   null,
-    bool_prop_1          varchar(1)      null,
-    bool_prop_2          varchar(1)      null,
+    bool_prop_1          bool      null,
+    bool_prop_2          bool      null,
     primary key (sched_name,trigger_name,trigger_group)
 )  ;
+
+
+create index idx_qrtz_j_req_recovery on qrtz_job_details(SCHED_NAME,REQUESTS_RECOVERY);
+create index idx_qrtz_j_grp on qrtz_job_details(SCHED_NAME,JOB_GROUP);
+
+create index idx_qrtz_t_j on qrtz_triggers(SCHED_NAME,JOB_NAME,JOB_GROUP);
+create index idx_qrtz_t_jg on qrtz_triggers(SCHED_NAME,JOB_GROUP);
+create index idx_qrtz_t_c on qrtz_triggers(SCHED_NAME,CALENDAR_NAME);
+create index idx_qrtz_t_g on qrtz_triggers(SCHED_NAME,TRIGGER_GROUP);
+create index idx_qrtz_t_state on qrtz_triggers(SCHED_NAME,TRIGGER_STATE);
+create index idx_qrtz_t_n_state on qrtz_triggers(SCHED_NAME,TRIGGER_NAME,TRIGGER_GROUP,TRIGGER_STATE);
+create index idx_qrtz_t_n_g_state on qrtz_triggers(SCHED_NAME,TRIGGER_GROUP,TRIGGER_STATE);
+create index idx_qrtz_t_next_fire_time on qrtz_triggers(SCHED_NAME,NEXT_FIRE_TIME);
+create index idx_qrtz_t_nft_st on qrtz_triggers(SCHED_NAME,TRIGGER_STATE,NEXT_FIRE_TIME);
+create index idx_qrtz_t_nft_misfire on qrtz_triggers(SCHED_NAME,MISFIRE_INSTR,NEXT_FIRE_TIME);
+create index idx_qrtz_t_nft_st_misfire on qrtz_triggers(SCHED_NAME,MISFIRE_INSTR,NEXT_FIRE_TIME,TRIGGER_STATE);
+create index idx_qrtz_t_nft_st_misfire_grp on qrtz_triggers(SCHED_NAME,MISFIRE_INSTR,NEXT_FIRE_TIME,TRIGGER_GROUP,TRIGGER_STATE);
+
+create index idx_qrtz_ft_trig_inst_name on qrtz_fired_triggers(SCHED_NAME,INSTANCE_NAME);
+create index idx_qrtz_ft_inst_job_req_rcvry on qrtz_fired_triggers(SCHED_NAME,INSTANCE_NAME,REQUESTS_RECOVERY);
+create index idx_qrtz_ft_j_g on qrtz_fired_triggers(SCHED_NAME,JOB_NAME,JOB_GROUP);
+create index idx_qrtz_ft_jg on qrtz_fired_triggers(SCHED_NAME,JOB_GROUP);
+create index idx_qrtz_ft_t_g on qrtz_fired_triggers(SCHED_NAME,TRIGGER_NAME,TRIGGER_GROUP);
+create index idx_qrtz_ft_tg on qrtz_fired_triggers(SCHED_NAME,TRIGGER_GROUP);

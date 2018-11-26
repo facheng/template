@@ -25,8 +25,7 @@ import com.template.project.system.post.service.IPostService;
  */
 @Controller
 @RequestMapping("/system/post")
-public class PostController extends BaseController
-{
+public class PostController extends BaseController {
     private String prefix = "system/post";
 
     @Autowired
@@ -34,16 +33,14 @@ public class PostController extends BaseController
 
     @RequiresPermissions("system:post:view")
     @GetMapping()
-    public String operlog()
-    {
+    public String operlog() {
         return prefix + "/post";
     }
 
     @RequiresPermissions("system:post:list")
     @PostMapping("/list")
     @ResponseBody
-    public TableDataInfo list(Post post)
-    {
+    public TableDataInfo list(Post post) {
         startPage();
         List<Post> list = postService.selectPostList(post);
         return getDataTable(list);
@@ -53,8 +50,7 @@ public class PostController extends BaseController
     @RequiresPermissions("system:post:export")
     @PostMapping("/export")
     @ResponseBody
-    public AjaxResult export(Post post)
-    {
+    public AjaxResult export(Post post) {
         List<Post> list = postService.selectPostList(post);
         ExcelUtil<Post> util = new ExcelUtil<Post>(Post.class);
         return util.exportExcel(list, "post");
@@ -64,14 +60,10 @@ public class PostController extends BaseController
     @Log(title = "岗位管理", businessType = BusinessType.DELETE)
     @PostMapping("/remove")
     @ResponseBody
-    public AjaxResult remove(String ids)
-    {
-        try
-        {
+    public AjaxResult remove(String ids) {
+        try {
             return toAjax(postService.deletePostByIds(ids));
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             return error(e.getMessage());
         }
     }
@@ -80,8 +72,7 @@ public class PostController extends BaseController
      * 新增岗位
      */
     @GetMapping("/add")
-    public String add()
-    {
+    public String add() {
         return prefix + "/add";
     }
 
@@ -92,8 +83,7 @@ public class PostController extends BaseController
     @Log(title = "岗位管理", businessType = BusinessType.INSERT)
     @PostMapping("/add")
     @ResponseBody
-    public AjaxResult addSave(Post post)
-    {
+    public AjaxResult addSave(Post post) {
         return toAjax(postService.insertPost(post));
     }
 
@@ -101,8 +91,7 @@ public class PostController extends BaseController
      * 修改岗位
      */
     @GetMapping("/edit/{postId}")
-    public String edit(@PathVariable("postId") Long postId, ModelMap mmap)
-    {
+    public String edit(@PathVariable("postId") Long postId, ModelMap mmap) {
         mmap.put("post", postService.selectPostById(postId));
         return prefix + "/edit";
     }
@@ -114,8 +103,7 @@ public class PostController extends BaseController
     @Log(title = "岗位管理", businessType = BusinessType.UPDATE)
     @PostMapping("/edit")
     @ResponseBody
-    public AjaxResult editSave(Post post)
-    {
+    public AjaxResult editSave(Post post) {
         return toAjax(postService.updatePost(post));
     }
 
@@ -124,8 +112,7 @@ public class PostController extends BaseController
      */
     @PostMapping("/checkPostNameUnique")
     @ResponseBody
-    public String checkPostNameUnique(Post post)
-    {
+    public String checkPostNameUnique(Post post) {
         return postService.checkPostNameUnique(post);
     }
 
@@ -134,8 +121,7 @@ public class PostController extends BaseController
      */
     @PostMapping("/checkPostCodeUnique")
     @ResponseBody
-    public String checkPostCodeUnique(Post post)
-    {
+    public String checkPostCodeUnique(Post post) {
         return postService.checkPostCodeUnique(post);
     }
 }

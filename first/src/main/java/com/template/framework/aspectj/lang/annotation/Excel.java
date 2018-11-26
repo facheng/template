@@ -11,8 +11,7 @@ import java.lang.annotation.Target;
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
-public @interface Excel
-{
+public @interface Excel {
     /**
      * 导出到Excel中的名字.
      */

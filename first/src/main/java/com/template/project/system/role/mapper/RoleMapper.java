@@ -7,12 +7,12 @@ import com.template.project.system.role.domain.Role;
  * 角色表 数据层
  * 
  */
-public interface RoleMapper
-{
+public interface RoleMapper {
     /**
      * 根据条件分页查询角色数据
      * 
-     * @param role 角色信息
+     * @param role
+     *            角色信息
      * @return 角色数据集合信息
      */
     public List<Role> selectRoleList(Role role);
@@ -20,7 +20,8 @@ public interface RoleMapper
     /**
      * 根据用户ID查询角色
      * 
-     * @param userId 用户ID
+     * @param userId
+     *            用户ID
      * @return 角色列表
      */
     public List<Role> selectRolesByUserId(Long userId);
@@ -28,7 +29,8 @@ public interface RoleMapper
     /**
      * 通过角色ID查询角色
      * 
-     * @param roleId 角色ID
+     * @param roleId
+     *            角色ID
      * @return 角色对象信息
      */
     public Role selectRoleById(Long roleId);
@@ -36,7 +38,8 @@ public interface RoleMapper
     /**
      * 通过角色ID删除角色
      * 
-     * @param roleId 角色ID
+     * @param roleId
+     *            角色ID
      * @return 结果
      */
     public int deleteRoleById(Long roleId);
@@ -44,7 +47,8 @@ public interface RoleMapper
     /**
      * 批量角色用户信息
      * 
-     * @param ids 需要删除的数据ID
+     * @param ids
+     *            需要删除的数据ID
      * @return 结果
      */
     public int deleteRoleByIds(Long[] ids);
@@ -52,7 +56,8 @@ public interface RoleMapper
     /**
      * 修改角色信息
      * 
-     * @param role 角色信息
+     * @param role
+     *            角色信息
      * @return 结果
      */
     public int updateRole(Role role);
@@ -60,7 +65,8 @@ public interface RoleMapper
     /**
      * 新增角色信息
      * 
-     * @param role 角色信息
+     * @param role
+     *            角色信息
      * @return 结果
      */
     public int insertRole(Role role);
@@ -68,15 +74,17 @@ public interface RoleMapper
     /**
      * 校验角色名称是否唯一
      * 
-     * @param roleName 角色名称
+     * @param roleName
+     *            角色名称
      * @return 角色信息
      */
     public Role checkRoleNameUnique(String roleName);
-    
+
     /**
      * 校验角色权限是否唯一
      * 
-     * @param roleKey 角色权限
+     * @param roleKey
+     *            角色权限
      * @return 角色信息
      */
     public Role checkRoleKeyUnique(String roleKey);

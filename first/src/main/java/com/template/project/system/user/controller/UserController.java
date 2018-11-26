@@ -29,8 +29,7 @@ import com.template.project.system.user.service.IUserService;
  */
 @Controller
 @RequestMapping("/system/user")
-public class UserController extends BaseController
-{
+public class UserController extends BaseController {
     private String prefix = "system/user";
 
     @Autowired
@@ -44,16 +43,14 @@ public class UserController extends BaseController
 
     @RequiresPermissions("system:user:view")
     @GetMapping()
-    public String user()
-    {
+    public String user() {
         return prefix + "/user";
     }
 
     @RequiresPermissions("system:user:list")
     @PostMapping("/list")
     @ResponseBody
-    public TableDataInfo list(User user)
-    {
+    public TableDataInfo list(User user) {
         startPage();
         List<User> list = userService.selectUserList(user);
         return getDataTable(list);
@@ -63,8 +60,7 @@ public class UserController extends BaseController
     @RequiresPermissions("system:user:export")
     @PostMapping("/export")
     @ResponseBody
-    public AjaxResult export(User user)
-    {
+    public AjaxResult export(User user) {
         List<User> list = userService.selectUserList(user);
         ExcelUtil<User> util = new ExcelUtil<User>(User.class);
         return util.exportExcel(list, "user");
@@ -74,8 +70,7 @@ public class UserController extends BaseController
      * 新增用户
      */
     @GetMapping("/add")
-    public String add(ModelMap mmap)
-    {
+    public String add(ModelMap mmap) {
         mmap.put("roles", roleService.selectRoleAll());
         mmap.put("posts", postService.selectPostAll());
         return prefix + "/add";
@@ -89,10 +84,8 @@ public class UserController extends BaseController
     @PostMapping("/add")
     @Transactional(rollbackFor = Exception.class)
     @ResponseBody
-    public AjaxResult addSave(User user)
-    {
-        if (StringUtils.isNotNull(user.getUserId()) && User.isAdmin(user.getUserId()))
-        {
+    public AjaxResult addSave(User user) {
+        if (StringUtils.isNotNull(user.getUserId()) && User.isAdmin(user.getUserId())) {
             return error("不允许修改超级管理员用户");
         }
         return toAjax(userService.insertUser(user));
@@ -102,8 +95,7 @@ public class UserController extends BaseController
      * 修改用户
      */
     @GetMapping("/edit/{userId}")
-    public String edit(@PathVariable("userId") Long userId, ModelMap mmap)
-    {
+    public String edit(@PathVariable("userId") Long userId, ModelMap mmap) {
         mmap.put("user", userService.selectUserById(userId));
         mmap.put("roles", roleService.selectRolesByUserId(userId));
         mmap.put("posts", postService.selectPostsByUserId(userId));
@@ -118,10 +110,8 @@ public class UserController extends BaseController
     @PostMapping("/edit")
     @Transactional(rollbackFor = Exception.class)
     @ResponseBody
-    public AjaxResult editSave(User user)
-    {
-        if (StringUtils.isNotNull(user.getUserId()) && User.isAdmin(user.getUserId()))
-        {
+    public AjaxResult editSave(User user) {
+        if (StringUtils.isNotNull(user.getUserId()) && User.isAdmin(user.getUserId())) {
             return error("不允许修改超级管理员用户");
         }
         return toAjax(userService.updateUser(user));
@@ -130,8 +120,7 @@ public class UserController extends BaseController
     @RequiresPermissions("system:user:resetPwd")
     @Log(title = "重置密码", businessType = BusinessType.UPDATE)
     @GetMapping("/resetPwd/{userId}")
-    public String resetPwd(@PathVariable("userId") Long userId, ModelMap mmap)
-    {
+    public String resetPwd(@PathVariable("userId") Long userId, ModelMap mmap) {
         mmap.put("user", userService.selectUserById(userId));
         return prefix + "/resetPwd";
     }
@@ -140,8 +129,7 @@ public class UserController extends BaseController
     @Log(title = "重置密码", businessType = BusinessType.UPDATE)
     @PostMapping("/resetPwd")
     @ResponseBody
-    public AjaxResult resetPwd(User user)
-    {
+    public AjaxResult resetPwd(User user) {
         return toAjax(userService.resetUserPwd(user));
     }
 
@@ -149,14 +137,10 @@ public class UserController extends BaseController
     @Log(title = "用户管理", businessType = BusinessType.DELETE)
     @PostMapping("/remove")
     @ResponseBody
-    public AjaxResult remove(String ids)
-    {
-        try
-        {
+    public AjaxResult remove(String ids) {
+        try {
             return toAjax(userService.deleteUserByIds(ids));
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             return error(e.getMessage());
         }
     }
@@ -166,8 +150,7 @@ public class UserController extends BaseController
      */
     @PostMapping("/checkLoginNameUnique")
     @ResponseBody
-    public String checkLoginNameUnique(User user)
-    {
+    public String checkLoginNameUnique(User user) {
         return userService.checkLoginNameUnique(user.getLoginName());
     }
 
@@ -176,8 +159,7 @@ public class UserController extends BaseController
      */
     @PostMapping("/checkPhoneUnique")
     @ResponseBody
-    public String checkPhoneUnique(User user)
-    {
+    public String checkPhoneUnique(User user) {
         return userService.checkPhoneUnique(user);
     }
 
@@ -186,8 +168,7 @@ public class UserController extends BaseController
      */
     @PostMapping("/checkEmailUnique")
     @ResponseBody
-    public String checkEmailUnique(User user)
-    {
+    public String checkEmailUnique(User user) {
         return userService.checkEmailUnique(user);
     }
 }

@@ -12,8 +12,7 @@ import com.template.project.monitor.online.domain.OnlineSession;
  * 同步Session数据到Db
  * 
  */
-public class SyncOnlineSessionFilter extends PathMatchingFilter
-{
+public class SyncOnlineSessionFilter extends PathMatchingFilter {
     @Autowired
     private OnlineSessionDAO onlineSessionDAO;
 
@@ -26,13 +25,11 @@ public class SyncOnlineSessionFilter extends PathMatchingFilter
      * @throws Exception
      */
     @Override
-    protected boolean preHandle(ServletRequest request, ServletResponse response) throws Exception
-    {
+    protected boolean preHandle(ServletRequest request, ServletResponse response) throws Exception {
         OnlineSession session = (OnlineSession) request.getAttribute(ShiroConstants.ONLINE_SESSION);
         // 如果session stop了 也不同步
         // session停止时间，如果stopTimestamp不为null，则代表已停止
-        if (session != null && session.getUserId() != null && session.getStopTimestamp() == null)
-        {
+        if (session != null && session.getUserId() != null && session.getStopTimestamp() == null) {
             onlineSessionDAO.syncToDb(session);
         }
         return true;

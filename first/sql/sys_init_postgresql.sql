@@ -3,18 +3,18 @@
 -- ----------------------------
 drop table if exists sys_dept;
 create table sys_dept (
-  dept_id 			bigserial 		not null,
-  parent_id 		int   	default 0 			       ,
-  ancestors 		varchar(50)     default '' 			      ,
-  dept_name 		varchar(30) 	default '' 				   ,
-  order_num 		int 			default 0 			       ,
+  dept_id             bigserial         not null,
+  parent_id         int       default 0                    ,
+  ancestors         varchar(50)     default ''                   ,
+  dept_name         varchar(30)     default ''                    ,
+  order_num         int             default 0                    ,
   leader            varchar(20)     default ''                 ,
   phone             varchar(11)     default ''                 ,
   email             varchar(50)     default ''                 ,
-  status 			char(1) 		default '0' 			   ,
-  del_flag			char(1) 		default '0' 			   ,
+  status             int         default 0               ,
+  del_flag            char(1)         default '0'                ,
   create_by         varchar(64)     default ''                 ,
-  create_time 	    timestamp  without time zone                ,
+  create_time         timestamp  without time zone                ,
   update_by         varchar(64)     default ''                 ,
   update_time       timestamp  without time zone                                   ,
   primary key (dept_id)
@@ -55,26 +55,26 @@ insert into sys_dept values(109,  102, '0,100,102',  '财务部门',   2, 'xx', 
 -- ----------------------------
 drop table if exists sys_user;
 create table sys_user (
-  user_id 			bigserial 		not null,
-  dept_id 			int		default null			  ,
-  login_name 		varchar(30) 	not null 				   ,
-  user_name 		varchar(30) 	not null 				   ,
-  user_type 		varchar(2) 	    default '00' 		     ,
-  email  			varchar(50) 	default '' 				   ,
-  phonenumber  		varchar(11) 	default '' 				  ,
-  sex  		        char(1) 	    default '0' 			   ,
-  avatar            varchar(100) 	default '' 				   ,
-  password 			varchar(50) 	default '' 				  ,
-  salt 				varchar(20) 	default '' 				   ,
-  status 			char(1) 		default '0' 			   ,
-  del_flag			char(1) 		default '0' 			   ,
+  user_id             bigserial         not null,
+  dept_id             int        default null              ,
+  login_name         varchar(30)     not null                    ,
+  user_name         varchar(30)     not null                    ,
+  user_type         varchar(2)         default '00'              ,
+  email              varchar(50)     default ''                    ,
+  phonenumber          varchar(11)     default ''                   ,
+  sex                  char(1)         default '0'                ,
+  avatar            varchar(100)     default ''                    ,
+  password             varchar(50)     default ''                   ,
+  salt                 varchar(20)     default ''                    ,
+  status               char(1)         default '0'                ,
+  del_flag            char(1)         default '0'                ,
   login_ip          varchar(20)     default ''                 ,
   login_date        timestamp  without time zone                                   ,
   create_by         varchar(64)     default ''                 ,
-  create_time 	    timestamp  without time zone                                   ,
+  create_time         timestamp  without time zone                                   ,
   update_by         varchar(64)     default ''                 ,
   update_time       timestamp  without time zone                                  ,
-  remark 		    varchar(500) 	default '' 				  ,
+  remark             varchar(500)     default ''                   ,
   primary key (user_id)
 );
 
@@ -105,7 +105,6 @@ comment on column sys_user.remark is '备注';
 insert into sys_user values(1,  103, 'admin', 'xx', '00', 'xx@163.com', '15888888888', '1', '', '29c67a30398638269fe600f73a054934', '111111', '0', '0', '127.0.0.1', '2018-03-16 11:30:00', 'admin', '2018-03-16 11:30:00', 'xx', '2018-03-16 11:30:00', '管理员');
 insert into sys_user values(2,  105, 'test',    'xx', '00', 'xx@qq.com',  '15666666666', '1', '', '8e6d98b90472783cc73c17047ddccf36', '222222', '0', '0', '127.0.0.1', '2018-03-16 11:30:00', 'admin', '2018-03-16 11:30:00', 'xx', '2018-03-16 11:30:00', '测试员');
 
-
 -- ----------------------------
 -- 3、岗位信息表
 -- ----------------------------
@@ -113,29 +112,29 @@ drop table if exists sys_post;
 create table sys_post
 (
   post_id       bigserial                    not null     ,
-	post_code     varchar(64)                  not null     ,
-	post_name     varchar(50)                  not null     ,
-	post_sort     int                          not null     ,
-	status        char(1)                      not null     ,
+    post_code     varchar(64)                  not null     ,
+    post_name     varchar(50)                  not null     ,
+    post_sort     int                          not null     ,
+    status        int                     not null   default 0  ,
   create_by     varchar(64)     default ''                ,
   create_time   timestamp  without time zone             ,
-  update_by     varchar(64) 	  default ''			          ,
-	update_time   timestamp  without time zone              ,
-  remark 		  varchar(500) 	  default '' 				          ,
-	primary key (post_id)
+  update_by     varchar(64)       default ''                      ,
+    update_time   timestamp  without time zone              ,
+  remark           varchar(500)       default ''                           ,
+    primary key (post_id)
 );
 
 comment   on  table sys_post is '岗位信息表';
-comment 	on 	column 	sys_post.post_id     	is	'岗位ID';
-comment 	on 	column 	sys_post.post_code   	is	'岗位编码';
-comment 	on 	column 	sys_post.post_name   	is	'岗位名称';
-comment 	on 	column 	sys_post.post_sort   	is	'显示顺序';
-comment 	on 	column 	sys_post.status      	is	'状态（0正常 1停用）';
-comment 	on 	column 	sys_post.create_by   	is	'创建者';
-comment 	on 	column 	sys_post.create_time 	is	'创建时间';
-comment 	on 	column 	sys_post.update_by   	is	'更新者';
-comment 	on 	column 	sys_post.update_time 	is	'更新时间';
-comment 	on 	column 	sys_post.remark 	is	'备注';
+comment     on     column     sys_post.post_id         is    '岗位ID';
+comment     on     column     sys_post.post_code       is    '岗位编码';
+comment     on     column     sys_post.post_name       is    '岗位名称';
+comment     on     column     sys_post.post_sort       is    '显示顺序';
+comment     on     column     sys_post.status          is    '状态（0正常 1停用）';
+comment     on     column     sys_post.create_by       is    '创建者';
+comment     on     column     sys_post.create_time     is    '创建时间';
+comment     on     column     sys_post.update_by       is    '更新者';
+comment     on     column     sys_post.update_time     is    '更新时间';
+comment     on     column     sys_post.remark     is    '备注';
 -- ----------------------------
 -- 初始化-岗位信息表数据
 -- ----------------------------
@@ -150,32 +149,32 @@ insert into sys_post values(4, 'user', '普通员工',  4, '0', 'admin', '2018-0
 -- ----------------------------
 drop table if exists sys_role;
 create table sys_role (
-  role_id 			bigserial 		not null                    ,
-  role_name 		varchar(30) 	not null 				    ,
-  role_key 		    varchar(100) 	not null 				    ,
+  role_id             bigserial         not null                    ,
+  role_name         varchar(30)     not null                     ,
+  role_key             varchar(100)     not null                     ,
   role_sort         int          not null                       ,
-  data_scope        char(1) 	    default '1'				    ,
-  status 			      char(1) 		not null 			    ,
-  del_flag			    char(1) 		default '0' ,
+  data_scope        char(1)         default '1'                    ,
+  status                   char(1)         not null    default '0'             ,
+  del_flag                char(1)         default '0' ,
   create_by         varchar(64)     default ''                  ,
-  create_time 		timestamp  without time zone                ,
-  update_by 		varchar(64) 	default ''			        ,
-  update_time 		timestamp  without time zone                ,
-  remark 			varchar(500) 	default '' 				    ,
+  create_time         timestamp  without time zone                ,
+  update_by         varchar(64)     default ''                    ,
+  update_time         timestamp  without time zone                ,
+  remark             varchar(500)     default ''                     ,
   primary key (role_id)
 );
 
 comment   on  table  sys_role is '角色信息表';
-comment 	on 	column 	sys_role.role_id 	is	'角色ID';
-comment 	on 	column 	sys_role.role_name 	is	'角色名称';
-comment 	on 	column 	sys_role.role_key 	is	'角色权限字符串';
-comment 	on 	column 	sys_role.role_sort  	is	'显示顺序';
-comment 	on 	column 	sys_role.data_scope 	is	'数据范围（1：全部数据权限 2：自定数据权限）';
-comment 	on 	column 	sys_role.status 	    is	'角色状态（0正常 1停用）';
-comment 	on 	column 	sys_role.del_flag	is	'删除标志（0代表存在 2代表删除）';
-comment 	on 	column 	sys_role.create_by  	is	'创建者';
-comment 	on 	column 	sys_role.create_time	is	'创建时间';
-comment 	on 	column 	sys_role.update_by 	is	'更新者';
+comment     on     column     sys_role.role_id     is    '角色ID';
+comment     on     column     sys_role.role_name     is    '角色名称';
+comment     on     column     sys_role.role_key     is    '角色权限字符串';
+comment     on     column     sys_role.role_sort      is    '显示顺序';
+comment     on     column     sys_role.data_scope     is    '数据范围（1：全部数据权限 2：自定数据权限）';
+comment     on     column     sys_role.status         is    '角色状态（0正常 1停用）';
+comment     on     column     sys_role.del_flag    is    '删除标志（0代表存在 2代表删除）';
+comment     on     column     sys_role.create_by      is    '创建者';
+comment     on     column     sys_role.create_time    is    '创建时间';
+comment     on     column     sys_role.update_by     is    '更新者';
 -- ----------------------------
 -- 初始化-角色信息表数据
 -- ----------------------------
@@ -188,38 +187,38 @@ insert into sys_role values('2', '普通角色', 'common', 2, 2, '0', '0', 'admi
 -- ----------------------------
 drop table if exists sys_menu;
 create table sys_menu (
-  menu_id 			bigserial 		not null   ,
-  menu_name 		varchar(50) 	not null 				  ,
-  parent_id 		int 		default 0 			      ,
-  order_num 		int 			default 0 			      ,
-  url 				varchar(200) 	default '#'				  ,
-  menu_type 		char(1) 		default '' 			      ,
-  visible 			int 		default 0 				   ,
-  perms 			varchar(100) 	default '' 				  ,
-  icon 				varchar(100) 	default '#' 			   ,
+  menu_id             bigserial         not null   ,
+  menu_name         varchar(50)     not null                   ,
+  parent_id         int         default 0                   ,
+  order_num         int             default 0                   ,
+  url                 varchar(200)     default '#'                  ,
+  menu_type         char(1)         default ''                   ,
+  visible             int         default 0                    ,
+  perms             varchar(100)     default ''                   ,
+  icon                 varchar(100)     default '#'                ,
   create_by         varchar(64)     default ''                 ,
-  create_time 		timestamp  without time zone                     ,
-  update_by 		varchar(64) 	default ''			       ,
-  update_time 		timestamp  without time zone                      ,
-  remark 			varchar(500) 	default '' 				  ,
+  create_time         timestamp  without time zone                     ,
+  update_by         varchar(64)     default ''                   ,
+  update_time         timestamp  without time zone                      ,
+  remark             varchar(500)     default ''                   ,
   primary key (menu_id)
 );
 
 comment   on  table   sys_menu is '菜单权限表';
-comment 	on 	column 	sys_menu.menu_id 	is	'菜单ID';
-comment 	on 	column 	sys_menu.menu_name 	is	'菜单名称';
-comment 	on 	column 	sys_menu.parent_id 	is	'父菜单ID';
-comment 	on 	column 	sys_menu.order_num  	is	'显示顺序';
-comment 	on 	column 	sys_menu.url 	is	'请求地址';
-comment 	on 	column 	sys_menu.menu_type 	    is	'菜单类型（M目录 C菜单 F按钮）';
-comment 	on 	column 	sys_menu.visible	is	'菜单状态（0显示 1隐藏）';
-comment 	on 	column 	sys_menu.perms	is	'权限标识';
-comment 	on 	column 	sys_menu.icon  	is	'菜单图标';
-comment 	on 	column 	sys_menu.create_by	is	'创建者';
-comment 	on 	column 	sys_menu.create_time 	is	'创建时间';
-comment 	on 	column 	sys_menu.update_by	is	'更新者';
-comment 	on 	column 	sys_menu.update_time 	is	'更新时间';
-comment 	on 	column 	sys_menu.remark 	is	'备注';
+comment     on     column     sys_menu.menu_id     is    '菜单ID';
+comment     on     column     sys_menu.menu_name     is    '菜单名称';
+comment     on     column     sys_menu.parent_id     is    '父菜单ID';
+comment     on     column     sys_menu.order_num      is    '显示顺序';
+comment     on     column     sys_menu.url     is    '请求地址';
+comment     on     column     sys_menu.menu_type         is    '菜单类型（M目录 C菜单 F按钮）';
+comment     on     column     sys_menu.visible    is    '菜单状态（0显示 1隐藏）';
+comment     on     column     sys_menu.perms    is    '权限标识';
+comment     on     column     sys_menu.icon      is    '菜单图标';
+comment     on     column     sys_menu.create_by    is    '创建者';
+comment     on     column     sys_menu.create_time     is    '创建时间';
+comment     on     column     sys_menu.update_by    is    '更新者';
+comment     on     column     sys_menu.update_time     is    '更新时间';
+comment     on     column     sys_menu.remark     is    '备注';
 -- ----------------------------
 -- 初始化-菜单信息表数据
 -- ----------------------------
@@ -322,8 +321,8 @@ insert into sys_menu values('1055', '生成代码', '113', '2', '#',  'F', '0', 
 -- ----------------------------
 drop table if exists sys_user_role;
 create table sys_user_role (
-  user_id 	bigint not null ,
-  role_id 	bigint not null ,
+  user_id     bigint not null ,
+  role_id     bigint not null ,
   primary key(user_id, role_id)
 );
 
@@ -338,8 +337,8 @@ insert into sys_user_role values ('2', '2');
 -- ----------------------------
 drop table if exists sys_role_menu;
 create table sys_role_menu (
-  role_id 	bigint not null ,
-  menu_id 	bigint not null,
+  role_id     bigint not null ,
+  menu_id     bigint not null,
   primary key(role_id, menu_id)
 );
 
@@ -429,8 +428,8 @@ insert into sys_role_menu values ('2', '1055');
 -- ----------------------------
 drop table if exists sys_role_dept;
 create table sys_role_dept (
-  role_id 	bigint not null   ,
-  dept_id 	bigint not null ,
+  role_id     bigint not null   ,
+  dept_id     bigint not null ,
   primary key(role_id, dept_id)
 );
 
@@ -447,9 +446,9 @@ insert into sys_role_dept values ('2', '105');
 drop table if exists sys_user_post;
 create table sys_user_post
 (
-	user_id bigint not null ,
-	post_id bigint not null ,
-	primary key (user_id, post_id)
+    user_id bigint not null ,
+    post_id bigint not null ,
+    primary key (user_id, post_id)
 ) ;
 
 -- ----------------------------
@@ -464,68 +463,68 @@ insert into sys_user_post values ('2', '2');
 -- ----------------------------
 drop table if exists sys_oper_log;
 create table sys_oper_log (
-  oper_id 			BIGSERIAL 		not null    ,
+  oper_id             BIGSERIAL         not null    ,
   title             varchar(50)     default ''              ,
   business_type     int          default 0                  ,
   method            varchar(100)    default ''                ,
   operator_type     int          default 0                  ,
-  oper_name 	    varchar(50)     default '' 		 	 	  ,
-  dept_name 		varchar(50)     default '' 		 	 	 ,
-  oper_url 		    varchar(255) 	default '' 				  ,
-  oper_ip 			varchar(30) 	default '' 				 ,
+  oper_name         varchar(50)     default ''                     ,
+  dept_name         varchar(50)     default ''                    ,
+  oper_url             varchar(255)     default ''                   ,
+  oper_ip             varchar(30)     default ''                  ,
   oper_location     varchar(255)    default ''              ,
-  oper_param 		varchar(255) 	default '' 				 ,
-  status 			int 		    default 0				  ,
-  error_msg 		varchar(2000) 	default '' 				   ,
-  oper_time 		TIMESTAMP WITHOUT TIME ZONE                           ,
+  oper_param         varchar(255)     default ''                  ,
+  status             int             default 0                  ,
+  error_msg         varchar(2000)     default ''                    ,
+  oper_time         TIMESTAMP WITHOUT TIME ZONE                           ,
   primary key (oper_id)
 );
 
 comment   on  table   sys_oper_log is '日志主键';
-comment 	on 	column 	sys_oper_log.oper_id 	is	'模块标题';
-comment 	on 	column 	sys_oper_log.title 	is	'菜单名称';
-comment 	on 	column 	sys_oper_log.business_type 	is	'业务类型（0其它 1新增 2修改 3删除）';
-comment 	on 	column 	sys_oper_log.method  	is	'方法名称';
-comment 	on 	column 	sys_oper_log.operator_type 	is	'操作类别（0其它 1后台用户 2手机端用户）';
-comment 	on 	column 	sys_oper_log.oper_name 	    is	'操作人员';
-comment 	on 	column 	sys_oper_log.dept_name	is	'部门名称';
-comment 	on 	column 	sys_oper_log.oper_url	is	'请求URL';
-comment 	on 	column 	sys_oper_log.oper_ip  	is	'主机地址';
-comment 	on 	column 	sys_oper_log.oper_location	is	'操作地点';
-comment 	on 	column 	sys_oper_log.oper_param 	is	'请求参数';
-comment 	on 	column 	sys_oper_log.status	is	'操作状态（0正常 1异常）';
-comment 	on 	column 	sys_oper_log.error_msg 	is	'错误消息';
-comment 	on 	column 	sys_oper_log.oper_time 	is	'操作时间';
+comment     on     column     sys_oper_log.oper_id     is    '模块标题';
+comment     on     column     sys_oper_log.title     is    '菜单名称';
+comment     on     column     sys_oper_log.business_type     is    '业务类型（0其它 1新增 2修改 3删除）';
+comment     on     column     sys_oper_log.method      is    '方法名称';
+comment     on     column     sys_oper_log.operator_type     is    '操作类别（0其它 1后台用户 2手机端用户）';
+comment     on     column     sys_oper_log.oper_name         is    '操作人员';
+comment     on     column     sys_oper_log.dept_name    is    '部门名称';
+comment     on     column     sys_oper_log.oper_url    is    '请求URL';
+comment     on     column     sys_oper_log.oper_ip      is    '主机地址';
+comment     on     column     sys_oper_log.oper_location    is    '操作地点';
+comment     on     column     sys_oper_log.oper_param     is    '请求参数';
+comment     on     column     sys_oper_log.status    is    '操作状态（0正常 1异常）';
+comment     on     column     sys_oper_log.error_msg     is    '错误消息';
+comment     on     column     sys_oper_log.oper_time     is    '操作时间';
 -- ----------------------------
 -- 11、字典类型表
 -- ----------------------------
 drop table if exists sys_dict_type;
 create table sys_dict_type
 (
-	dict_id          BIGSERIAL		 not null     ,
-	dict_name        varchar(100)    default ''                ,
-	dict_type        varchar(100)    default ''                ,
-  status 			 char(1) 		 default '0'			    ,
+    dict_id          BIGSERIAL         not null     ,
+    dict_name        varchar(100)    default ''                ,
+    dict_type        varchar(100)    default ''                ,
+  status              int          default 0                ,
   create_by        varchar(64)     default ''                 ,
   create_time      TIMESTAMP WITHOUT TIME ZONE                                  ,
-  update_by        varchar(64) 	 default ''			       ,
-	update_time      TIMESTAMP WITHOUT TIME ZONE                                   ,
-  remark 	         varchar(500) 	 default '' 				,
-	primary key (dict_id),
-	unique (dict_type)
+  update_by        varchar(64)      default ''                   ,
+    update_time      TIMESTAMP WITHOUT TIME ZONE                                   ,
+  remark              varchar(500)      default ''                 ,
+    primary key (dict_id),
+    unique (dict_type)
 );
 
 
 comment   on  table   sys_dict_type is '字典类型表';
-comment 	on 	column 	sys_dict_type.dict_id 	is	'字典主键';
-comment 	on 	column 	sys_dict_type.dict_name 	is	'字典名称';
-comment 	on 	column 	sys_dict_type.dict_type 	is	'字典类型';
-comment 	on 	column 	sys_dict_type.status  	is	'状态（0正常 1停用）';
-comment 	on 	column 	sys_dict_type.create_by 	is	'创建者';
-comment 	on 	column 	sys_dict_type.create_time 	    is	'创建时间';
-comment 	on 	column 	sys_dict_type.update_by	is	'更新者';
-comment 	on 	column 	sys_dict_type.update_time	is	'更新时间';
-comment 	on 	column 	sys_dict_type.remark  	is	'备注';
+comment     on     column     sys_dict_type.dict_id     is    '字典主键';
+comment     on     column     sys_dict_type.dict_name     is    '字典名称';
+comment     on     column     sys_dict_type.dict_type     is    '字典类型';
+comment     on     column     sys_dict_type.status      is    '状态（0正常 1停用）';
+comment     on     column     sys_dict_type.create_by     is    '创建者';
+comment     on     column     sys_dict_type.create_time         is    '创建时间';
+comment     on     column     sys_dict_type.update_by    is    '更新者';
+comment     on     column     sys_dict_type.update_time    is    '更新时间';
+comment     on     column     sys_dict_type.remark      is    '备注';
 
 insert into sys_dict_type values(1,  '用户性别', 'sys_user_sex',        '0', 'admin', '2018-03-16 11:30:00', 'xx', '2018-03-16 11:30:00', '用户性别列表');
 insert into sys_dict_type values(2,  '菜单状态', 'sys_show_hide',       '0', 'admin', '2018-03-16 11:30:00', 'xx', '2018-03-16 11:30:00', '菜单状态列表');
@@ -544,39 +543,39 @@ insert into sys_dict_type values(9,  '系统状态', 'sys_common_status',   '0',
 drop table if exists sys_dict_data;
 create table sys_dict_data
 (
-	dict_code        BIGSERIAL 		 not null ,
-	dict_sort        int          default 0                  ,
-	dict_label       varchar(100)    default ''                ,
-	dict_value       varchar(100)    default ''                 ,
-	dict_type        varchar(100)    default ''                 ,
-	css_class        varchar(100)    default ''                 ,
-	list_class       varchar(100)    default ''                ,
-	is_default       char(1)         default 'N'                ,
-    status 			 char(1) 		 default '0'			    ,
+    dict_code        BIGSERIAL          not null ,
+    dict_sort        int          default 0                  ,
+    dict_label       varchar(100)    default ''                ,
+    dict_value       varchar(100)    default ''                 ,
+    dict_type        varchar(100)    default ''                 ,
+    css_class        varchar(100)    default ''                 ,
+    list_class       varchar(100)    default ''                ,
+    is_default       char(1)         default 'N'                ,
+    status              int          default 0                ,
     create_by        varchar(64)     default ''               ,
     create_time      TIMESTAMP WITHOUT TIME ZONE                               ,
-    update_by        varchar(64) 	 default ''			        ,
-	update_time      TIMESTAMP WITHOUT TIME ZONE                                  ,
-    remark 	         varchar(500) 	 default '' 			,
-	primary key (dict_code)
+    update_by        varchar(64)      default ''                    ,
+    update_time      TIMESTAMP WITHOUT TIME ZONE                                  ,
+    remark              varchar(500)      default ''             ,
+    primary key (dict_code)
 );
 
 
 comment   on  table   sys_dict_data is '字典数据表';
-comment 	on 	column 	sys_dict_data.dict_code 	is	'字典编码';
-comment 	on 	column 	sys_dict_data.dict_sort 	is	'字典排序';
-comment 	on 	column 	sys_dict_data.dict_label 	is	'字典标签';
-comment 	on 	column 	sys_dict_data.dict_value  	is	'字典键值';
-comment 	on 	column 	sys_dict_data.dict_type 	is	'字典类型';
-comment 	on 	column 	sys_dict_data.css_class 	    is	'样式属性（其他样式扩展）';
-comment 	on 	column 	sys_dict_data.list_class	is	'表格回显样式';
-comment 	on 	column 	sys_dict_data.is_default	is	'是否默认（Y是 N否）';
-comment 	on 	column 	sys_dict_data.status  	is	'状态（0正常 1停用）';
-comment 	on 	column 	sys_dict_data.create_by 	    is	'更新者';
-comment 	on 	column 	sys_dict_data.create_time	is	'创建时间';
-comment 	on 	column 	sys_dict_data.update_by	is	'更新者';
-comment 	on 	column 	sys_dict_data.update_time  	is	'更新时间';
-comment 	on 	column 	sys_dict_data.remark  	is	'备注';
+comment     on     column     sys_dict_data.dict_code     is    '字典编码';
+comment     on     column     sys_dict_data.dict_sort     is    '字典排序';
+comment     on     column     sys_dict_data.dict_label     is    '字典标签';
+comment     on     column     sys_dict_data.dict_value      is    '字典键值';
+comment     on     column     sys_dict_data.dict_type     is    '字典类型';
+comment     on     column     sys_dict_data.css_class         is    '样式属性（其他样式扩展）';
+comment     on     column     sys_dict_data.list_class    is    '表格回显样式';
+comment     on     column     sys_dict_data.is_default    is    '是否默认（Y是 N否）';
+comment     on     column     sys_dict_data.status      is    '状态（0正常 1停用）';
+comment     on     column     sys_dict_data.create_by         is    '更新者';
+comment     on     column     sys_dict_data.create_time    is    '创建时间';
+comment     on     column     sys_dict_data.update_by    is    '更新者';
+comment     on     column     sys_dict_data.update_time      is    '更新时间';
+comment     on     column     sys_dict_data.remark      is    '备注';
 
 
 insert into sys_dict_data values(1,  1,  '男',       '0',  'sys_user_sex',        '',   '',        'Y', '0', 'admin', '2018-03-16 11:33:00', 'xx', '2018-03-16 11:33:00', '性别男');
@@ -611,30 +610,30 @@ insert into sys_dict_data values(26, 2,  '失败',     '1',  'sys_common_status'
 -- ----------------------------
 drop table if exists sys_config;
 create table sys_config (
-	config_id 		   BIGSERIAL 	     not null     ,
-	config_name        varchar(100)  default ''                 ,
-	config_key         varchar(100)  default ''                 ,
-	config_value       varchar(100)  default ''                 ,
-	config_type        char(1)       default 'N'                ,
+    config_id            BIGSERIAL          not null     ,
+    config_name        varchar(100)  default ''                 ,
+    config_key         varchar(100)  default ''                 ,
+    config_value       varchar(100)  default ''                 ,
+    config_type        char(1)       default 'N'                ,
     create_by          varchar(64)   default ''                ,
-    create_time 	   TIMESTAMP WITHOUT TIME ZONE                                ,
+    create_time        TIMESTAMP WITHOUT TIME ZONE                                ,
     update_by          varchar(64)   default ''                 ,
     update_time        TIMESTAMP WITHOUT TIME ZONE                                 ,
-	remark 	           varchar(500)  default '' 				,
-	primary key (config_id)
+    remark                varchar(500)  default ''                 ,
+    primary key (config_id)
 );
 
 comment   on  table   sys_config is '参数配置表';
-comment 	on 	column 	sys_config.config_id 	is	'参数主键';
-comment 	on 	column 	sys_config.config_name 	is	'参数名称';
-comment 	on 	column 	sys_config.config_key 	is	'参数键名';
-comment 	on 	column 	sys_config.config_value  	is	'参数键值';
-comment 	on 	column 	sys_config.config_type 	is	'系统内置（Y是 N否）';
-comment 	on 	column 	sys_config.create_by 	    is	'更新者';
-comment 	on 	column 	sys_config.create_time	is	'创建时间';
-comment 	on 	column 	sys_config.update_by	is	'更新者';
-comment 	on 	column 	sys_config.update_time  	is	'更新时间';
-comment 	on 	column 	sys_config.remark  	is	'备注';
+comment     on     column     sys_config.config_id     is    '参数主键';
+comment     on     column     sys_config.config_name     is    '参数名称';
+comment     on     column     sys_config.config_key     is    '参数键名';
+comment     on     column     sys_config.config_value      is    '参数键值';
+comment     on     column     sys_config.config_type     is    '系统内置（Y是 N否）';
+comment     on     column     sys_config.create_by         is    '更新者';
+comment     on     column     sys_config.create_time    is    '创建时间';
+comment     on     column     sys_config.update_by    is    '更新者';
+comment     on     column     sys_config.update_time      is    '更新时间';
+comment     on     column     sys_config.remark      is    '备注';
 
 
 insert into sys_config values(1, '主框架页-默认皮肤样式名称', 'sys.index.skinName',     'skin-default',  'Y', 'admin', '2018-03-16 11:33:00', 'xx', '2018-03-16 11:33:00', '默认 skin-default、蓝色 skin-blue、黄色 skin-yellow' );
@@ -646,73 +645,73 @@ insert into sys_config values(2, '用户管理-账号初始密码',     'sys.use
 -- ----------------------------
 drop table if exists sys_logininfor;
 create table sys_logininfor (
-  info_id 		 BIGSERIAL 	   not null ,
-  login_name 	 varchar(50)   default '' 			     ,
-  ipaddr 		 varchar(50)   default '' 			     ,
+  info_id          BIGSERIAL        not null ,
+  login_name      varchar(50)   default ''                  ,
+  ipaddr          varchar(50)   default ''                  ,
   login_location varchar(255)  default ''               ,
-  browser  		 varchar(50)   default '' 			    ,
-  os      		 varchar(50)   default '' 			    ,
-  status 		 char(1) 	   default '0' 			    ,
-  msg      		 varchar(255)  default '' 			     ,
-  login_time 	 TIMESTAMP WITHOUT TIME ZONE           ,
+  browser           varchar(50)   default ''                 ,
+  os               varchar(50)   default ''                 ,
+  status          char(1)        default '0'                 ,
+  msg               varchar(255)  default ''                  ,
+  login_time      TIMESTAMP WITHOUT TIME ZONE           ,
   primary key (info_id)
 );
 
 comment   on  table   sys_logininfor is '系统访问记录';
-comment 	on 	column 	sys_logininfor.info_id 	is	'访问ID';
-comment 	on 	column 	sys_logininfor.login_name 	is	'登录账号';
-comment 	on 	column 	sys_logininfor.ipaddr 	is	'登录IP地址';
-comment 	on 	column 	sys_logininfor.login_location  	is	'登录地点';
-comment 	on 	column 	sys_logininfor.browser 	is	'浏览器类型';
-comment 	on 	column 	sys_logininfor.os 	    is	'操作系统';
-comment 	on 	column 	sys_logininfor.status	is	'登录状态（0成功 1失败）';
-comment 	on 	column 	sys_logininfor.msg	is	'提示消息';
-comment 	on 	column 	sys_logininfor.login_time  	is	'访问时间';
+comment     on     column     sys_logininfor.info_id     is    '访问ID';
+comment     on     column     sys_logininfor.login_name     is    '登录账号';
+comment     on     column     sys_logininfor.ipaddr     is    '登录IP地址';
+comment     on     column     sys_logininfor.login_location      is    '登录地点';
+comment     on     column     sys_logininfor.browser     is    '浏览器类型';
+comment     on     column     sys_logininfor.os         is    '操作系统';
+comment     on     column     sys_logininfor.status    is    '登录状态（0成功 1失败）';
+comment     on     column     sys_logininfor.msg    is    '提示消息';
+comment     on     column     sys_logininfor.login_time      is    '访问时间';
 
 -- ----------------------------
 -- 15、在线用户记录
 -- ----------------------------
 drop table if exists sys_user_online;
 create table sys_user_online (
-  sessionId 	    varchar(50)  default ''            ,
-  login_name 	    varchar(50)  default '' 		 	 	,
-  dept_name 		varchar(50)  default '' 		 	 	,
-  ipaddr 		    varchar(50)  default '' 			 ,
+  sessionId         varchar(50)  default ''            ,
+  login_name         varchar(50)  default ''                   ,
+  dept_name         varchar(50)  default ''                   ,
+  ipaddr             varchar(50)  default ''              ,
   login_location    varchar(255) default ''            ,
-  browser  		    varchar(50)  default '' 			 	,
-  os      		    varchar(50)  default '' 			 	,
-  status      	    varchar(10)  default '' 			 	,
-  start_timestamp 	TIMESTAMP WITHOUT TIME ZONE                               ,
+  browser              varchar(50)  default ''                  ,
+  os                  varchar(50)  default ''                  ,
+  status              varchar(10)  default ''                  ,
+  start_timestamp     TIMESTAMP WITHOUT TIME ZONE                               ,
   last_access_time  TIMESTAMP WITHOUT TIME ZONE                              ,
-  expire_time 	    int 		 default 0 			 	  ,
+  expire_time         bigint   ,
   primary key (sessionId)
 );
 
 comment   on  table   sys_user_online is '在线用户记录';
-comment 	on 	column 	sys_user_online.sessionId 	is	'用户会话id';
-comment 	on 	column 	sys_user_online.login_name 	is	'登录账号';
-comment 	on 	column 	sys_user_online.ipaddr 	is	'登录IP地址';
-comment 	on 	column 	sys_user_online.login_location  	is	'登录地点';
-comment 	on 	column 	sys_user_online.browser 	is	'浏览器类型';
-comment 	on 	column 	sys_user_online.os 	    is	'操作系统';
-comment 	on 	column 	sys_user_online.status	is	'在线状态on_line在线off_line离线';
-comment 	on 	column 	sys_user_online.dept_name	is	'部门名称';
-comment 	on 	column 	sys_user_online.start_timestamp  	is	'session创建时间';
-comment 	on 	column 	sys_user_online.last_access_time	is	'session最后访问时间';
-comment 	on 	column 	sys_user_online.expire_time  	is	'超时时间，单位为分钟';
+comment     on     column     sys_user_online.sessionId     is    '用户会话id';
+comment     on     column     sys_user_online.login_name     is    '登录账号';
+comment     on     column     sys_user_online.ipaddr     is    '登录IP地址';
+comment     on     column     sys_user_online.login_location      is    '登录地点';
+comment     on     column     sys_user_online.browser     is    '浏览器类型';
+comment     on     column     sys_user_online.os         is    '操作系统';
+comment     on     column     sys_user_online.status    is    '在线状态on_line在线off_line离线';
+comment     on     column     sys_user_online.dept_name    is    '部门名称';
+comment     on     column     sys_user_online.start_timestamp      is    'session创建时间';
+comment     on     column     sys_user_online.last_access_time    is    'session最后访问时间';
+comment     on     column     sys_user_online.expire_time      is    '超时时间戳，单位为分钟';
 -- ----------------------------
 -- 16、定时任务调度表
 -- ----------------------------
 drop table if exists sys_job;
 create table sys_job (
-  job_id 		          BIGSERIAL 	    not null    ,
+  job_id                   BIGSERIAL         not null    ,
   job_name            varchar(64)   default ''                ,
   job_group           varchar(64)   default ''                 ,
   method_name         varchar(500)  default ''               ,
   method_params       varchar(200)  default ''                 ,
   cron_expression     varchar(255)  default ''                 ,
   misfire_policy      varchar(20)   default '1'                ,
-  status              char(1)       default '0'               ,
+  status              int       default 0               ,
   create_by           varchar(64)   default ''                ,
   create_time         TIMESTAMP WITHOUT TIME ZONE                                ,
   update_by           varchar(64)   default ''                 ,
@@ -722,19 +721,19 @@ create table sys_job (
 );
 
 comment   on  table   sys_job is '定时任务调度表';
-comment 	on 	column 	sys_job.job_id 	is	'任务ID';
-comment 	on 	column 	sys_job.job_name 	is	'任务名称';
-comment 	on 	column 	sys_job.job_group 	is	'任务组名';
-comment 	on 	column 	sys_job.method_name  	is	'任务方法';
-comment 	on 	column 	sys_job.method_params 	is	'方法参数';
-comment 	on 	column 	sys_job.cron_expression 	    is	'cron执行表达式';
-comment 	on 	column 	sys_job.status	is	'状态（0正常 1暂停）';
-comment 	on 	column 	sys_job.misfire_policy	is	'计划执行错误策略（1继续 2等待 3放弃）';
-comment 	on 	column 	sys_job.create_by  	is	'创建者';
-comment 	on 	column 	sys_job.create_time	is	'创建时间';
-comment 	on 	column 	sys_job.update_by  	is	'更新者';
-comment 	on 	column 	sys_job.update_time  	is	'更新时间';
-comment 	on 	column 	sys_job.remark	is	'备注信息';
+comment     on     column     sys_job.job_id     is    '任务ID';
+comment     on     column     sys_job.job_name     is    '任务名称';
+comment     on     column     sys_job.job_group     is    '任务组名';
+comment     on     column     sys_job.method_name      is    '任务方法';
+comment     on     column     sys_job.method_params     is    '方法参数';
+comment     on     column     sys_job.cron_expression         is    'cron执行表达式';
+comment     on     column     sys_job.status    is    '状态（0正常 1暂停）';
+comment     on     column     sys_job.misfire_policy    is    '计划执行错误策略（1继续 2等待 3放弃）';
+comment     on     column     sys_job.create_by      is    '创建者';
+comment     on     column     sys_job.create_time    is    '创建时间';
+comment     on     column     sys_job.update_by      is    '更新者';
+comment     on     column     sys_job.update_time      is    '更新时间';
+comment     on     column     sys_job.remark    is    '备注信息';
 
 insert into sys_job values(1, 'ryTask', '系统默认（无参）', 'ryNoParams',  '',   '0/10 * * * * ?', '1', '1', 'admin', '2018-03-16 11:33:00', 'ry', '2018-03-16 11:33:00', '');
 insert into sys_job values(2, 'ryTask', '系统默认（有参）', 'ryParams',    'ry', '0/20 * * * * ?', '1', '1', 'admin', '2018-03-16 11:33:00', 'ry', '2018-03-16 11:33:00', '');
@@ -745,13 +744,13 @@ insert into sys_job values(2, 'ryTask', '系统默认（有参）', 'ryParams', 
 -- ----------------------------
 drop table if exists sys_job_log;
 create table sys_job_log (
-  job_log_id          BIGSERIAL 	    not null     ,
+  job_log_id          BIGSERIAL         not null     ,
   job_name            varchar(64)   not null                  ,
   job_group           varchar(64)   not null                   ,
   method_name         varchar(500)                            ,
   method_params       varchar(200)  default ''                 ,
   job_message         varchar(500)                             ,
-  status              char(1)       default '0'                ,
+  status              int       default 0               ,
   exception_info      text                                     ,
   create_time         TIMESTAMP WITHOUT TIME ZONE                      ,
   primary key (job_log_id)
@@ -759,43 +758,56 @@ create table sys_job_log (
 
 
 comment   on  table   sys_job_log is '定时任务调度表';
-comment 	on 	column 	sys_job_log.job_log_id 	is	'任务日志ID';
-comment 	on 	column 	sys_job_log.job_name 	is	'任务名称';
-comment 	on 	column 	sys_job_log.job_group 	is	'任务组名';
-comment 	on 	column 	sys_job_log.method_name  	is	'任务方法';
-comment 	on 	column 	sys_job_log.method_params 	is	'方法参数';
-comment 	on 	column 	sys_job_log.job_message 	    is	'日志信息';
-comment 	on 	column 	sys_job_log.status	is	'执行状态（0正常 1失败）';
-comment 	on 	column 	sys_job_log.exception_info	is	'异常信息';
-comment 	on 	column 	sys_job_log.create_time	is	'创建时间';
+comment     on     column     sys_job_log.job_log_id     is    '任务日志ID';
+comment     on     column     sys_job_log.job_name     is    '任务名称';
+comment     on     column     sys_job_log.job_group     is    '任务组名';
+comment     on     column     sys_job_log.method_name      is    '任务方法';
+comment     on     column     sys_job_log.method_params     is    '方法参数';
+comment     on     column     sys_job_log.job_message         is    '日志信息';
+comment     on     column     sys_job_log.status    is    '执行状态（0正常 1失败）';
+comment     on     column     sys_job_log.exception_info    is    '异常信息';
+comment     on     column     sys_job_log.create_time    is    '创建时间';
 
 -- ----------------------------
 -- 18、通知公告表
 -- ----------------------------
 drop table if exists sys_notice;
 create table sys_notice (
-  notice_id 		BIGSERIAL		    not null     ,
-  notice_title 		varchar(50) 	not null 				  ,
-  notice_type 		char(2) 	    not null 			       ,
+  notice_id         BIGSERIAL            not null     ,
+  notice_title         varchar(50)     not null                   ,
+  notice_type         char(2)         not null                    ,
   notice_content    varchar(500)    not null                   ,
-  status 			char(1) 		default '0' 			   ,
+  status             int         default 0                ,
   create_by         varchar(64)     default ''                ,
-  create_time 		TIMESTAMP WITHOUT TIME ZONE                               ,
-  update_by 		varchar(64) 	default ''			     ,
-  update_time 		TIMESTAMP WITHOUT TIME ZONE                                  ,
-  remark 			varchar(255) 	default '' 				   ,
+  create_time         TIMESTAMP WITHOUT TIME ZONE                               ,
+  update_by         varchar(64)     default ''                 ,
+  update_time         TIMESTAMP WITHOUT TIME ZONE                                  ,
+  remark             varchar(255)     default ''                    ,
   primary key (notice_id)
 );
 
 comment   on  table   sys_notice is '通知公告表';
-comment 	on 	column 	sys_notice.notice_id 	is	'公告ID';
-comment 	on 	column 	sys_notice.notice_title 	is	'公告标题';
-comment 	on 	column 	sys_notice.notice_type 	is	'公告类型（1通知 2公告）';
-comment 	on 	column 	sys_notice.notice_content  	is	'公告内容';
-comment 	on 	column 	sys_notice.status 	is	'公告状态（0正常 1关闭）';
-comment 	on 	column 	sys_notice.create_by 	    is	'创建者';
-comment 	on 	column 	sys_notice.create_time	is	'创建时间';
-comment 	on 	column 	sys_notice.update_by	is	'更新者';
-comment 	on 	column 	sys_notice.update_time	is	'更新时间';
+comment     on     column     sys_notice.notice_id     is    '公告ID';
+comment     on     column     sys_notice.notice_title     is    '公告标题';
+comment     on     column     sys_notice.notice_type     is    '公告类型（1通知 2公告）';
+comment     on     column     sys_notice.notice_content      is    '公告内容';
+comment     on     column     sys_notice.status     is    '公告状态（0正常 1关闭）';
+comment     on     column     sys_notice.create_by         is    '创建者';
+comment     on     column     sys_notice.create_time    is    '创建时间';
+comment     on     column     sys_notice.update_by    is    '更新者';
+comment     on     column     sys_notice.update_time    is    '更新时间';
+comment     on     column     sys_notice.remark    is    '备注';
 
-comment 	on 	column 	sys_notice.remark	is	'备注';
+
+-- ----------------------------
+-- 19、seq 重置
+-- ----------------------------
+SELECT setval('sys_dept_dept_id_seq',(SELECT max(dept_id) FROM sys_dept));
+SELECT setval('sys_user_user_id_seq',(SELECT max(user_id) FROM sys_user));
+SELECT setval('sys_post_post_id_seq',(SELECT max(post_id) FROM sys_post));
+SELECT setval('sys_role_role_id_seq',(SELECT max(role_id) FROM sys_role));
+SELECT setval('sys_menu_menu_id_seq',(SELECT max(menu_id) FROM sys_menu));
+SELECT setval('sys_dict_type_dict_id_seq',(SELECT max(dict_id) FROM sys_dict_type));
+SELECT setval('sys_dict_data_dict_code_seq',(SELECT max(dict_code) FROM sys_dict_data));
+SELECT setval('sys_config_config_id_seq',(SELECT max(config_id) FROM sys_config));
+SELECT setval('sys_job_job_id_seq',(SELECT max(job_id) FROM sys_job));

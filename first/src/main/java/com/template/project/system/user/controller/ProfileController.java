@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+
 import com.template.common.utils.file.FileUploadUtils;
 import com.template.framework.aspectj.lang.annotation.Log;
 import com.template.framework.aspectj.lang.enums.BusinessType;
@@ -29,8 +30,7 @@ import com.template.project.system.user.service.IUserService;
  */
 @Controller
 @RequestMapping("/system/user/profile")
-public class ProfileController extends BaseController
-{
+public class ProfileController extends BaseController {
     private static final Logger log = LoggerFactory.getLogger(ProfileController.class);
 
     private String prefix = "system/user/profile";
@@ -45,8 +45,7 @@ public class ProfileController extends BaseController
      * 个人信息
      */
     @GetMapping()
-    public String profile(ModelMap mmap)
-    {
+    public String profile(ModelMap mmap) {
         User user = getSysUser();
         user.setSex(dict.getLabel("sys_user_sex", user.getSex()));
         mmap.put("user", user);
@@ -57,20 +56,17 @@ public class ProfileController extends BaseController
 
     @GetMapping("/checkPassword")
     @ResponseBody
-    public boolean checkPassword(String password)
-    {
+    public boolean checkPassword(String password) {
         User user = getSysUser();
         String encrypt = new Md5Hash(user.getLoginName() + password + user.getSalt()).toHex().toString();
-        if (user.getPassword().equals(encrypt))
-        {
+        if (user.getPassword().equals(encrypt)) {
             return true;
         }
         return false;
     }
 
     @GetMapping("/resetPwd/{userId}")
-    public String resetPwd(@PathVariable("userId") Long userId, ModelMap mmap)
-    {
+    public String resetPwd(@PathVariable("userId") Long userId, ModelMap mmap) {
         mmap.put("user", userService.selectUserById(userId));
         return prefix + "/resetPwd";
     }
@@ -78,11 +74,9 @@ public class ProfileController extends BaseController
     @Log(title = "重置密码", businessType = BusinessType.UPDATE)
     @PostMapping("/resetPwd")
     @ResponseBody
-    public AjaxResult resetPwd(User user)
-    {
+    public AjaxResult resetPwd(User user) {
         int rows = userService.resetUserPwd(user);
-        if (rows > 0)
-        {
+        if (rows > 0) {
             setSysUser(userService.selectUserById(user.getUserId()));
             return success();
         }
@@ -93,8 +87,7 @@ public class ProfileController extends BaseController
      * 修改用户
      */
     @GetMapping("/edit/{userId}")
-    public String edit(@PathVariable("userId") Long userId, ModelMap mmap)
-    {
+    public String edit(@PathVariable("userId") Long userId, ModelMap mmap) {
         mmap.put("user", userService.selectUserById(userId));
         return prefix + "/edit";
     }
@@ -103,8 +96,7 @@ public class ProfileController extends BaseController
      * 修改头像
      */
     @GetMapping("/avatar/{userId}")
-    public String avatar(@PathVariable("userId") Long userId, ModelMap mmap)
-    {
+    public String avatar(@PathVariable("userId") Long userId, ModelMap mmap) {
         mmap.put("user", userService.selectUserById(userId));
         return prefix + "/avatar";
     }
@@ -115,10 +107,8 @@ public class ProfileController extends BaseController
     @Log(title = "个人信息", businessType = BusinessType.UPDATE)
     @PostMapping("/update")
     @ResponseBody
-    public AjaxResult update(User user)
-    {
-        if (userService.updateUserInfo(user) > 0)
-        {
+    public AjaxResult update(User user) {
+        if (userService.updateUserInfo(user) > 0) {
             setSysUser(userService.selectUserById(user.getUserId()));
             return success();
         }
@@ -131,24 +121,18 @@ public class ProfileController extends BaseController
     @Log(title = "个人信息", businessType = BusinessType.UPDATE)
     @PostMapping("/updateAvatar")
     @ResponseBody
-    public AjaxResult updateAvatar(User user, @RequestParam("avatarfile") MultipartFile file)
-    {
-        try
-        {
-            if (!file.isEmpty())
-            {
+    public AjaxResult updateAvatar(User user, @RequestParam("avatarfile") MultipartFile file) {
+        try {
+            if (!file.isEmpty()) {
                 String avatar = FileUploadUtils.upload(ProjectConfig.getAvatarPath(), file);
                 user.setAvatar(avatar);
-                if (userService.updateUserInfo(user) > 0)
-                {
+                if (userService.updateUserInfo(user) > 0) {
                     setSysUser(userService.selectUserById(user.getUserId()));
                     return success();
                 }
             }
             return error();
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             log.error("修改头像失败！", e);
             return error(e.getMessage());
         }

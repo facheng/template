@@ -9,8 +9,7 @@ import com.template.framework.web.domain.BaseEntity;
  * 参数配置表 sys_config
  * 
  */
-public class Config extends BaseEntity
-{
+public class Config extends BaseEntity {
     private static final long serialVersionUID = 1L;
 
     /** 参数主键 */
@@ -33,69 +32,53 @@ public class Config extends BaseEntity
     @Excel(name = "系统内置", readConverterExp = "Y=是,N=否")
     private String configType;
 
-    public Long getConfigId()
-    {
+    public Long getConfigId() {
         return configId;
     }
 
-    public void setConfigId(Long configId)
-    {
+    public void setConfigId(Long configId) {
         this.configId = configId;
     }
 
-    public String getConfigName()
-    {
+    public String getConfigName() {
         return configName;
     }
 
-    public void setConfigName(String configName)
-    {
+    public void setConfigName(String configName) {
         this.configName = configName;
     }
 
-    public String getConfigKey()
-    {
+    public String getConfigKey() {
         return configKey;
     }
 
-    public void setConfigKey(String configKey)
-    {
+    public void setConfigKey(String configKey) {
         this.configKey = configKey;
     }
 
-    public String getConfigValue()
-    {
+    public String getConfigValue() {
         return configValue;
     }
 
-    public void setConfigValue(String configValue)
-    {
+    public void setConfigValue(String configValue) {
         this.configValue = configValue;
     }
 
-    public String getConfigType()
-    {
+    public String getConfigType() {
         return configType;
     }
 
-    public void setConfigType(String configType)
-    {
+    public void setConfigType(String configType) {
         this.configType = configType;
     }
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
-            .append("configId", getConfigId())
-            .append("configName", getConfigName())
-            .append("configKey", getConfigKey())
-            .append("configValue", getConfigValue())
-            .append("configType", getConfigType())
-            .append("createBy", getCreateBy())
-            .append("createTime", getCreateTime())
-            .append("updateBy", getUpdateBy())
-            .append("updateTime", getUpdateTime())
-            .append("remark", getRemark())
-            .toString();
+        return new ToStringBuilder(this, ToStringStyle.MULTI_LINE_STYLE).append("configId", getConfigId())
+                .append("configName", getConfigName()).append("configKey", getConfigKey())
+                .append("configValue", getConfigValue()).append("configType", getConfigType())
+                .append("createBy", getCreateBy()).append("createTime", getCreateTime())
+                .append("updateBy", getUpdateBy()).append("updateTime", getUpdateTime()).append("remark", getRemark())
+                .toString();
     }
 }

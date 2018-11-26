@@ -13,44 +13,43 @@ import com.template.common.support.Convert;
  * 
  */
 @Service
-public class NoticeServiceImpl implements INoticeService
-{
+public class NoticeServiceImpl implements INoticeService {
     @Autowired
     private NoticeMapper noticeMapper;
 
     /**
      * 查询公告信息
      * 
-     * @param noticeId 公告ID
+     * @param noticeId
+     *            公告ID
      * @return 公告信息
      */
     @Override
-    public Notice selectNoticeById(Long noticeId)
-    {
+    public Notice selectNoticeById(Long noticeId) {
         return noticeMapper.selectNoticeById(noticeId);
     }
 
     /**
      * 查询公告列表
      * 
-     * @param notice 公告信息
+     * @param notice
+     *            公告信息
      * @return 公告集合
      */
     @Override
-    public List<Notice> selectNoticeList(Notice notice)
-    {
+    public List<Notice> selectNoticeList(Notice notice) {
         return noticeMapper.selectNoticeList(notice);
     }
 
     /**
      * 新增公告
      * 
-     * @param notice 公告信息
+     * @param notice
+     *            公告信息
      * @return 结果
      */
     @Override
-    public int insertNotice(Notice notice)
-    {
+    public int insertNotice(Notice notice) {
         notice.setCreateBy(ShiroUtils.getLoginName());
         return noticeMapper.insertNotice(notice);
     }
@@ -58,12 +57,12 @@ public class NoticeServiceImpl implements INoticeService
     /**
      * 修改公告
      * 
-     * @param notice 公告信息
+     * @param notice
+     *            公告信息
      * @return 结果
      */
     @Override
-    public int updateNotice(Notice notice)
-    {
+    public int updateNotice(Notice notice) {
         notice.setUpdateBy(ShiroUtils.getLoginName());
         return noticeMapper.updateNotice(notice);
     }
@@ -71,12 +70,12 @@ public class NoticeServiceImpl implements INoticeService
     /**
      * 删除公告对象
      * 
-     * @param ids 需要删除的数据ID
+     * @param ids
+     *            需要删除的数据ID
      * @return 结果
      */
     @Override
-    public int deleteNoticeByIds(String ids)
-    {
+    public int deleteNoticeByIds(String ids) {
         return noticeMapper.deleteNoticeByIds(Convert.toStrArray(ids));
     }
 }

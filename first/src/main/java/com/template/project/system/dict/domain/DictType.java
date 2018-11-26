@@ -9,8 +9,7 @@ import com.template.framework.web.domain.BaseEntity;
  * 字典类型对象 sys_dict_type
  * 
  */
-public class DictType extends BaseEntity
-{
+public class DictType extends BaseEntity {
     private static final long serialVersionUID = 1L;
 
     /** 字典主键 */
@@ -29,58 +28,44 @@ public class DictType extends BaseEntity
     @Excel(name = "状态", readConverterExp = "0=正常,1=停用")
     private String status;
 
-    public Long getDictId()
-    {
+    public Long getDictId() {
         return dictId;
     }
 
-    public void setDictId(Long dictId)
-    {
+    public void setDictId(Long dictId) {
         this.dictId = dictId;
     }
 
-    public String getDictName()
-    {
+    public String getDictName() {
         return dictName;
     }
 
-    public void setDictName(String dictName)
-    {
+    public void setDictName(String dictName) {
         this.dictName = dictName;
     }
 
-    public String getDictType()
-    {
+    public String getDictType() {
         return dictType;
     }
 
-    public void setDictType(String dictType)
-    {
+    public void setDictType(String dictType) {
         this.dictType = dictType;
     }
 
-    public String getStatus()
-    {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(String status)
-    {
+    public void setStatus(String status) {
         this.status = status;
     }
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
-            .append("dictId", getDictId())
-            .append("dictName", getDictName())
-            .append("dictType", getDictType())
-            .append("status", getStatus())
-            .append("createBy", getCreateBy())
-            .append("createTime", getCreateTime())
-            .append("updateBy", getUpdateBy())
-            .append("updateTime", getUpdateTime())
-            .append("remark", getRemark())
-            .toString();
+        return new ToStringBuilder(this, ToStringStyle.MULTI_LINE_STYLE).append("dictId", getDictId())
+                .append("dictName", getDictName()).append("dictType", getDictType()).append("status", getStatus())
+                .append("createBy", getCreateBy()).append("createTime", getCreateTime())
+                .append("updateBy", getUpdateBy()).append("updateTime", getUpdateTime()).append("remark", getRemark())
+                .toString();
     }
 }

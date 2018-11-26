@@ -11,11 +11,9 @@ import java.util.Properties;
  * 
  */
 @Configuration
-public class ScheduleConfig
-{
+public class ScheduleConfig {
     @Bean
-    public SchedulerFactoryBean schedulerFactoryBean(DataSource dataSource)
-    {
+    public SchedulerFactoryBean schedulerFactoryBean(DataSource dataSource) {
         SchedulerFactoryBean factory = new SchedulerFactoryBean();
         factory.setDataSource(dataSource);
 
@@ -36,7 +34,8 @@ public class ScheduleConfig
         prop.put("org.quartz.jobStore.txIsolationLevelSerializable", "true");
 
         // sqlserver 启用
-        //prop.put("org.quartz.jobStore.selectWithLockSQL", "SELECT * FROM {0}LOCKS UPDLOCK WHERE LOCK_NAME = ?");
+        // prop.put("org.quartz.jobStore.selectWithLockSQL", "SELECT * FROM
+        // {0}LOCKS UPDLOCK WHERE LOCK_NAME = ?");
         prop.put("org.quartz.jobStore.misfireThreshold", "12000");
         prop.put("org.quartz.jobStore.tablePrefix", "QRTZ_");
         factory.setQuartzProperties(prop);

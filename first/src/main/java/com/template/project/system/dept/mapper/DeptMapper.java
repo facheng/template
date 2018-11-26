@@ -8,12 +8,12 @@ import com.template.project.system.dept.domain.Dept;
  * 部门管理 数据层
  * 
  */
-public interface DeptMapper
-{
+public interface DeptMapper {
     /**
      * 查询部门人数
      * 
-     * @param dept 部门信息
+     * @param dept
+     *            部门信息
      * @return 结果
      */
     public int selectDeptCount(Dept dept);
@@ -21,7 +21,8 @@ public interface DeptMapper
     /**
      * 查询部门是否存在用户
      * 
-     * @param deptId 部门ID
+     * @param deptId
+     *            部门ID
      * @return 结果
      */
     public int checkDeptExistUser(Long deptId);
@@ -29,7 +30,8 @@ public interface DeptMapper
     /**
      * 查询部门管理数据
      * 
-     * @param dept 部门信息
+     * @param dept
+     *            部门信息
      * @return 部门信息集合
      */
     public List<Dept> selectDeptList(Dept dept);
@@ -37,7 +39,8 @@ public interface DeptMapper
     /**
      * 删除部门管理信息
      * 
-     * @param deptId 部门ID
+     * @param deptId
+     *            部门ID
      * @return 结果
      */
     public int deleteDeptById(Long deptId);
@@ -45,7 +48,8 @@ public interface DeptMapper
     /**
      * 新增部门信息
      * 
-     * @param dept 部门信息
+     * @param dept
+     *            部门信息
      * @return 结果
      */
     public int insertDept(Dept dept);
@@ -53,7 +57,8 @@ public interface DeptMapper
     /**
      * 修改部门信息
      * 
-     * @param dept 部门信息
+     * @param dept
+     *            部门信息
      * @return 结果
      */
     public int updateDept(Dept dept);
@@ -61,7 +66,8 @@ public interface DeptMapper
     /**
      * 修改子元素关系
      * 
-     * @param depts 子元素
+     * @param depts
+     *            子元素
      * @return 结果
      */
     public int updateDeptChildren(@Param("depts") List<Dept> depts);
@@ -69,7 +75,8 @@ public interface DeptMapper
     /**
      * 根据部门ID查询信息
      * 
-     * @param deptId 部门ID
+     * @param deptId
+     *            部门ID
      * @return 部门信息
      */
     public Dept selectDeptById(Long deptId);
@@ -77,8 +84,10 @@ public interface DeptMapper
     /**
      * 校验部门名称是否唯一
      * 
-     * @param deptName 部门名称
-     * @param parentId 父部门ID
+     * @param deptName
+     *            部门名称
+     * @param parentId
+     *            父部门ID
      * @return 结果
      */
     public Dept checkDeptNameUnique(@Param("deptName") String deptName, @Param("parentId") Long parentId);
@@ -86,7 +95,8 @@ public interface DeptMapper
     /**
      * 根据角色ID查询部门
      *
-     * @param roleId 角色ID
+     * @param roleId
+     *            角色ID
      * @return 部门列表
      */
     public List<String> selectRoleDeptTree(Long roleId);

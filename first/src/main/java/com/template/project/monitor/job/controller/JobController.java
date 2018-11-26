@@ -25,8 +25,7 @@ import com.template.project.monitor.job.service.IJobService;
  */
 @Controller
 @RequestMapping("/monitor/job")
-public class JobController extends BaseController
-{
+public class JobController extends BaseController {
     private String prefix = "monitor/job";
 
     @Autowired
@@ -34,16 +33,14 @@ public class JobController extends BaseController
 
     @RequiresPermissions("monitor:job:view")
     @GetMapping()
-    public String job()
-    {
+    public String job() {
         return prefix + "/job";
     }
 
     @RequiresPermissions("monitor:job:list")
     @PostMapping("/list")
     @ResponseBody
-    public TableDataInfo list(Job job)
-    {
+    public TableDataInfo list(Job job) {
         startPage();
         List<Job> list = jobService.selectJobList(job);
         return getDataTable(list);
@@ -53,8 +50,7 @@ public class JobController extends BaseController
     @RequiresPermissions("monitor:job:export")
     @PostMapping("/export")
     @ResponseBody
-    public AjaxResult export(Job job)
-    {
+    public AjaxResult export(Job job) {
         List<Job> list = jobService.selectJobList(job);
         ExcelUtil<Job> util = new ExcelUtil<Job>(Job.class);
         return util.exportExcel(list, "job");
@@ -64,15 +60,11 @@ public class JobController extends BaseController
     @RequiresPermissions("monitor:job:remove")
     @PostMapping("/remove")
     @ResponseBody
-    public AjaxResult remove(String ids)
-    {
-        try
-        {
+    public AjaxResult remove(String ids) {
+        try {
             jobService.deleteJobByIds(ids);
             return success();
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
             return error(e.getMessage());
         }
@@ -85,8 +77,7 @@ public class JobController extends BaseController
     @RequiresPermissions("monitor:job:changeStatus")
     @PostMapping("/changeStatus")
     @ResponseBody
-    public AjaxResult changeStatus(Job job)
-    {
+    public AjaxResult changeStatus(Job job) {
         return toAjax(jobService.changeStatus(job));
     }
 
@@ -97,8 +88,7 @@ public class JobController extends BaseController
     @RequiresPermissions("monitor:job:changeStatus")
     @PostMapping("/run")
     @ResponseBody
-    public AjaxResult run(Job job)
-    {
+    public AjaxResult run(Job job) {
         return toAjax(jobService.run(job));
     }
 
@@ -106,8 +96,7 @@ public class JobController extends BaseController
      * 新增调度
      */
     @GetMapping("/add")
-    public String add()
-    {
+    public String add() {
         return prefix + "/add";
     }
 
@@ -118,8 +107,7 @@ public class JobController extends BaseController
     @RequiresPermissions("monitor:job:add")
     @PostMapping("/add")
     @ResponseBody
-    public AjaxResult addSave(Job job)
-    {
+    public AjaxResult addSave(Job job) {
         return toAjax(jobService.insertJobCron(job));
     }
 
@@ -127,8 +115,7 @@ public class JobController extends BaseController
      * 修改调度
      */
     @GetMapping("/edit/{jobId}")
-    public String edit(@PathVariable("jobId") Long jobId, ModelMap mmap)
-    {
+    public String edit(@PathVariable("jobId") Long jobId, ModelMap mmap) {
         mmap.put("job", jobService.selectJobById(jobId));
         return prefix + "/edit";
     }
@@ -140,18 +127,16 @@ public class JobController extends BaseController
     @RequiresPermissions("monitor:job:edit")
     @PostMapping("/edit")
     @ResponseBody
-    public AjaxResult editSave(Job job)
-    {
+    public AjaxResult editSave(Job job) {
         return toAjax(jobService.updateJobCron(job));
     }
-    
+
     /**
      * 校验cron表达式是否有效
      */
     @PostMapping("/checkCronExpressionIsValid")
     @ResponseBody
-    public boolean checkCronExpressionIsValid(Job job)
-    {
+    public boolean checkCronExpressionIsValid(Job job) {
         return jobService.checkCronExpressionIsValid(job.getCronExpression());
     }
 }

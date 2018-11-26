@@ -7,12 +7,12 @@ import com.template.project.system.dict.domain.DictType;
  * 字典 业务层
  * 
  */
-public interface IDictTypeService
-{
+public interface IDictTypeService {
     /**
      * 根据条件分页查询字典类型
      * 
-     * @param dictType 字典类型信息
+     * @param dictType
+     *            字典类型信息
      * @return 字典类型集合信息
      */
     public List<DictType> selectDictTypeList(DictType dictType);
@@ -27,7 +27,8 @@ public interface IDictTypeService
     /**
      * 根据字典类型ID查询信息
      * 
-     * @param dictId 字典类型ID
+     * @param dictId
+     *            字典类型ID
      * @return 字典类型
      */
     public DictType selectDictTypeById(Long dictId);
@@ -35,7 +36,8 @@ public interface IDictTypeService
     /**
      * 通过字典ID删除字典信息
      * 
-     * @param dictId 字典ID
+     * @param dictId
+     *            字典ID
      * @return 结果
      */
     public int deleteDictTypeById(Long dictId);
@@ -43,16 +45,19 @@ public interface IDictTypeService
     /**
      * 批量删除字典类型
      * 
-     * @param ids 需要删除的数据
+     * @param ids
+     *            需要删除的数据
      * @return 结果
-     * @throws Exception 异常
+     * @throws Exception
+     *             异常
      */
     public int deleteDictTypeByIds(String ids) throws Exception;
 
     /**
      * 新增保存字典类型信息
      * 
-     * @param dictType 字典类型信息
+     * @param dictType
+     *            字典类型信息
      * @return 结果
      */
     public int insertDictType(DictType dictType);
@@ -60,7 +65,8 @@ public interface IDictTypeService
     /**
      * 修改保存字典类型信息
      * 
-     * @param dictType 字典类型信息
+     * @param dictType
+     *            字典类型信息
      * @return 结果
      */
     public int updateDictType(DictType dictType);
@@ -68,7 +74,8 @@ public interface IDictTypeService
     /**
      * 校验字典类型称是否唯一
      * 
-     * @param dictType 字典类型
+     * @param dictType
+     *            字典类型
      * @return 结果
      */
     public String checkDictTypeUnique(DictType dictType);

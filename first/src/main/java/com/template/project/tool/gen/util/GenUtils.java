@@ -15,8 +15,7 @@ import com.template.project.tool.gen.domain.TableInfo;
  * 代码生成器 工具类
  * 
  */
-public class GenUtils
-{
+public class GenUtils {
     /** 项目空间路径 */
     private static final String PROJECT_PATH = getProjectPath();
 
@@ -29,12 +28,10 @@ public class GenUtils
     /**
      * 设置列信息
      */
-    public static List<ColumnInfo> transColums(List<ColumnInfo> columns)
-    {
+    public static List<ColumnInfo> transColums(List<ColumnInfo> columns) {
         // 列信息
         List<ColumnInfo> columsList = new ArrayList<>();
-        for (ColumnInfo column : columns)
-        {
+        for (ColumnInfo column : columns) {
             // 列名转换成Java属性名
             String attrName = StringUtils.convertToCamelCase(column.getColumnName());
             column.setAttrName(attrName);
@@ -54,8 +51,7 @@ public class GenUtils
      * 
      * @return 模板列表
      */
-    public static VelocityContext getVelocityContext(TableInfo table)
-    {
+    public static VelocityContext getVelocityContext(TableInfo table) {
         // java对象数据传递到模板文件vm
         VelocityContext velocityContext = new VelocityContext();
         String packageName = GenConfig.getPackageName();
@@ -77,8 +73,7 @@ public class GenUtils
      * 
      * @return 模板列表
      */
-    public static List<String> getTemplates()
-    {
+    public static List<String> getTemplates() {
         List<String> templates = new ArrayList<String>();
         templates.add("templates/vm/java/domain.java.vm");
         templates.add("templates/vm/java/Mapper.java.vm");
@@ -96,14 +91,11 @@ public class GenUtils
     /**
      * 表名转换成Java类名
      */
-    public static String tableToJava(String tableName)
-    {
-        if (Constants.AUTO_REOMVE_PRE.equals(GenConfig.getAutoRemovePre()))
-        {
+    public static String tableToJava(String tableName) {
+        if (Constants.AUTO_REOMVE_PRE.equals(GenConfig.getAutoRemovePre())) {
             tableName = tableName.substring(tableName.indexOf("_") + 1);
         }
-        if (StringUtils.isNotEmpty(GenConfig.getTablePrefix()))
-        {
+        if (StringUtils.isNotEmpty(GenConfig.getTablePrefix())) {
             tableName = tableName.replace(GenConfig.getTablePrefix(), "");
         }
         return StringUtils.convertToCamelCase(tableName);
@@ -112,8 +104,7 @@ public class GenUtils
     /**
      * 获取文件名
      */
-    public static String getFileName(String template, TableInfo table, String moduleName)
-    {
+    public static String getFileName(String template, TableInfo table, String moduleName) {
         // 小写类名
         String classname = table.getClassname();
         // 大写类名
@@ -122,55 +113,44 @@ public class GenUtils
         String mybatisPath = MYBATIS_PATH + "/" + moduleName + "/" + className;
         String htmlPath = TEMPLATES_PATH + "/" + moduleName + "/" + classname;
 
-        if (StringUtils.isNotEmpty(classname))
-        {
+        if (StringUtils.isNotEmpty(classname)) {
             javaPath += classname.replace(".", "/") + "/";
         }
 
-        if (template.contains("domain.java.vm"))
-        {
+        if (template.contains("domain.java.vm")) {
             return javaPath + "domain" + "/" + className + ".java";
         }
 
-        if (template.contains("Mapper.java.vm"))
-        {
+        if (template.contains("Mapper.java.vm")) {
             return javaPath + "mapper" + "/" + className + "Mapper.java";
         }
 
-        if (template.contains("Service.java.vm"))
-        {
+        if (template.contains("Service.java.vm")) {
             return javaPath + "service" + "/" + "I" + className + "Service.java";
         }
 
-        if (template.contains("ServiceImpl.java.vm"))
-        {
+        if (template.contains("ServiceImpl.java.vm")) {
             return javaPath + "service" + "/" + className + "ServiceImpl.java";
         }
 
-        if (template.contains("Controller.java.vm"))
-        {
+        if (template.contains("Controller.java.vm")) {
             return javaPath + "controller" + "/" + className + "Controller.java";
         }
 
-        if (template.contains("Mapper.xml.vm"))
-        {
+        if (template.contains("Mapper.xml.vm")) {
             return mybatisPath + "Mapper.xml";
         }
 
-        if (template.contains("list.html.vm"))
-        {
+        if (template.contains("list.html.vm")) {
             return htmlPath + "/" + classname + ".html";
         }
-        if (template.contains("add.html.vm"))
-        {
+        if (template.contains("add.html.vm")) {
             return htmlPath + "/" + "add.html";
         }
-        if (template.contains("edit.html.vm"))
-        {
+        if (template.contains("edit.html.vm")) {
             return htmlPath + "/" + "edit.html";
         }
-        if (template.contains("sql.vm"))
-        {
+        if (template.contains("sql.vm")) {
             return classname + "Menu.sql";
         }
         return null;
@@ -179,19 +159,18 @@ public class GenUtils
     /**
      * 获取模块名
      * 
-     * @param packageName 包名
+     * @param packageName
+     *            包名
      * @return 模块名
      */
-    public static String getModuleName(String packageName)
-    {
+    public static String getModuleName(String packageName) {
         int lastIndex = packageName.lastIndexOf(".");
         int nameLength = packageName.length();
         String moduleName = StringUtils.substring(packageName, lastIndex + 1, nameLength);
         return moduleName;
     }
 
-    public static String getProjectPath()
-    {
+    public static String getProjectPath() {
         String packageName = GenConfig.getPackageName();
         StringBuffer projectPath = new StringBuffer();
         projectPath.append("main/java/");
@@ -200,8 +179,7 @@ public class GenUtils
         return projectPath.toString();
     }
 
-    public static String replaceKeyword(String keyword)
-    {
+    public static String replaceKeyword(String keyword) {
         String keyName = keyword.replaceAll("(?:表|信息)", "");
         return keyName;
     }

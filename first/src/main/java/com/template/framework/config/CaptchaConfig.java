@@ -11,11 +11,10 @@ import com.google.code.kaptcha.util.Config;
  * 
  */
 @Configuration
-public class CaptchaConfig
-{
+public class CaptchaConfig {
+
     @Bean(name = "captchaProducer")
-    public DefaultKaptcha getKaptchaBean()
-    {
+    public DefaultKaptcha getKaptchaBean() {
         DefaultKaptcha defaultKaptcha = new DefaultKaptcha();
         Properties properties = new Properties();
         properties.setProperty("kaptcha.border", "yes");
@@ -35,8 +34,7 @@ public class CaptchaConfig
     }
 
     @Bean(name = "captchaProducerMath")
-    public DefaultKaptcha getKaptchaBeanMath()
-    {
+    public DefaultKaptcha getKaptchaBeanMath() {
         DefaultKaptcha defaultKaptcha = new DefaultKaptcha();
         Properties properties = new Properties();
         properties.setProperty("kaptcha.border", "yes");

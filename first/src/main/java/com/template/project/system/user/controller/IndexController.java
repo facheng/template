@@ -16,8 +16,7 @@ import com.template.project.system.user.domain.User;
  * 
  */
 @Controller
-public class IndexController extends BaseController
-{
+public class IndexController extends BaseController {
     @Autowired
     private IMenuService menuService;
 
@@ -26,8 +25,7 @@ public class IndexController extends BaseController
 
     // 系统首页
     @GetMapping("/index")
-    public String index(ModelMap mmap)
-    {
+    public String index(ModelMap mmap) {
         // 取身份信息
         User user = getSysUser();
         // 根据用户id取出菜单
@@ -40,8 +38,7 @@ public class IndexController extends BaseController
 
     // 系统介绍
     @GetMapping("/system/main")
-    public String main(ModelMap mmap)
-    {
+    public String main(ModelMap mmap) {
         mmap.put("version", projectConfig.getVersion());
         return "main";
     }

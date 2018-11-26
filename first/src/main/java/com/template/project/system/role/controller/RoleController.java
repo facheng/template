@@ -26,8 +26,7 @@ import com.template.project.system.role.service.IRoleService;
  */
 @Controller
 @RequestMapping("/system/role")
-public class RoleController extends BaseController
-{
+public class RoleController extends BaseController {
     private String prefix = "system/role";
 
     @Autowired
@@ -35,16 +34,14 @@ public class RoleController extends BaseController
 
     @RequiresPermissions("system:role:view")
     @GetMapping()
-    public String role()
-    {
+    public String role() {
         return prefix + "/role";
     }
 
     @RequiresPermissions("system:role:list")
     @PostMapping("/list")
     @ResponseBody
-    public TableDataInfo list(Role role)
-    {
+    public TableDataInfo list(Role role) {
         startPage();
         List<Role> list = roleService.selectRoleList(role);
         return getDataTable(list);
@@ -54,8 +51,7 @@ public class RoleController extends BaseController
     @RequiresPermissions("system:role:export")
     @PostMapping("/export")
     @ResponseBody
-    public AjaxResult export(Role role)
-    {
+    public AjaxResult export(Role role) {
         List<Role> list = roleService.selectRoleList(role);
         ExcelUtil<Role> util = new ExcelUtil<Role>(Role.class);
         return util.exportExcel(list, "role");
@@ -65,8 +61,7 @@ public class RoleController extends BaseController
      * 新增角色
      */
     @GetMapping("/add")
-    public String add()
-    {
+    public String add() {
         return prefix + "/add";
     }
 
@@ -78,8 +73,7 @@ public class RoleController extends BaseController
     @PostMapping("/add")
     @Transactional(rollbackFor = Exception.class)
     @ResponseBody
-    public AjaxResult addSave(Role role)
-    {
+    public AjaxResult addSave(Role role) {
         return toAjax(roleService.insertRole(role));
 
     }
@@ -88,8 +82,7 @@ public class RoleController extends BaseController
      * 修改角色
      */
     @GetMapping("/edit/{roleId}")
-    public String edit(@PathVariable("roleId") Long roleId, ModelMap mmap)
-    {
+    public String edit(@PathVariable("roleId") Long roleId, ModelMap mmap) {
         mmap.put("role", roleService.selectRoleById(roleId));
         return prefix + "/edit";
     }
@@ -102,8 +95,7 @@ public class RoleController extends BaseController
     @PostMapping("/edit")
     @Transactional(rollbackFor = Exception.class)
     @ResponseBody
-    public AjaxResult editSave(Role role)
-    {
+    public AjaxResult editSave(Role role) {
         return toAjax(roleService.updateRole(role));
     }
 
@@ -111,8 +103,7 @@ public class RoleController extends BaseController
      * 新增数据权限
      */
     @GetMapping("/rule/{roleId}")
-    public String rule(@PathVariable("roleId") Long roleId, ModelMap mmap)
-    {
+    public String rule(@PathVariable("roleId") Long roleId, ModelMap mmap) {
         mmap.put("role", roleService.selectRoleById(roleId));
         return prefix + "/rule";
     }
@@ -125,8 +116,7 @@ public class RoleController extends BaseController
     @PostMapping("/rule")
     @Transactional(rollbackFor = Exception.class)
     @ResponseBody
-    public AjaxResult ruleSave(Role role)
-    {
+    public AjaxResult ruleSave(Role role) {
         return toAjax(roleService.updateRule(role));
     }
 
@@ -134,14 +124,10 @@ public class RoleController extends BaseController
     @Log(title = "角色管理", businessType = BusinessType.DELETE)
     @PostMapping("/remove")
     @ResponseBody
-    public AjaxResult remove(String ids)
-    {
-        try
-        {
+    public AjaxResult remove(String ids) {
+        try {
             return toAjax(roleService.deleteRoleByIds(ids));
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             return error(e.getMessage());
         }
     }
@@ -151,8 +137,7 @@ public class RoleController extends BaseController
      */
     @PostMapping("/checkRoleNameUnique")
     @ResponseBody
-    public String checkRoleNameUnique(Role role)
-    {
+    public String checkRoleNameUnique(Role role) {
         return roleService.checkRoleNameUnique(role);
     }
 
@@ -161,8 +146,7 @@ public class RoleController extends BaseController
      */
     @PostMapping("/checkRoleKeyUnique")
     @ResponseBody
-    public String checkRoleKeyUnique(Role role)
-    {
+    public String checkRoleKeyUnique(Role role) {
         return roleService.checkRoleKeyUnique(role);
     }
 
@@ -170,8 +154,7 @@ public class RoleController extends BaseController
      * 选择菜单树
      */
     @GetMapping("/selectMenuTree")
-    public String selectMenuTree()
-    {
+    public String selectMenuTree() {
         return prefix + "/tree";
     }
 }

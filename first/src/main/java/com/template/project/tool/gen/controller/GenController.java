@@ -26,8 +26,7 @@ import com.template.project.tool.gen.service.IGenService;
  */
 @Controller
 @RequestMapping("/tool/gen")
-public class GenController extends BaseController
-{
+public class GenController extends BaseController {
     private String prefix = "tool/gen";
 
     @Autowired
@@ -35,16 +34,14 @@ public class GenController extends BaseController
 
     @RequiresPermissions("tool:gen:view")
     @GetMapping()
-    public String gen()
-    {
+    public String gen() {
         return prefix + "/gen";
     }
 
     @RequiresPermissions("tool:gen:list")
     @PostMapping("/list")
     @ResponseBody
-    public TableDataInfo list(TableInfo tableInfo)
-    {
+    public TableDataInfo list(TableInfo tableInfo) {
         startPage();
         List<TableInfo> list = genService.selectTableList(tableInfo);
         return getDataTable(list);
@@ -56,8 +53,7 @@ public class GenController extends BaseController
     @RequiresPermissions("tool:gen:code")
     @Log(title = "代码生成", businessType = BusinessType.GENCODE)
     @GetMapping("/genCode/{tableName}")
-    public void genCode(HttpServletResponse response, @PathVariable("tableName") String tableName) throws IOException
-    {
+    public void genCode(HttpServletResponse response, @PathVariable("tableName") String tableName) throws IOException {
         byte[] data = genService.generatorCode(tableName);
         response.reset();
         response.setHeader("Content-Disposition", "attachment; filename=\"template.zip\"");
@@ -74,8 +70,7 @@ public class GenController extends BaseController
     @Log(title = "代码生成", businessType = BusinessType.GENCODE)
     @GetMapping("/batchGenCode")
     @ResponseBody
-    public void batchGenCode(HttpServletResponse response, String tables) throws IOException
-    {
+    public void batchGenCode(HttpServletResponse response, String tables) throws IOException {
         String[] tableNames = Convert.toStrArray(tables);
         byte[] data = genService.generatorCode(tableNames);
         response.reset();

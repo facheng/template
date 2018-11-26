@@ -16,8 +16,7 @@ import com.template.project.system.user.mapper.UserPostMapper;
  * 
  */
 @Service
-public class PostServiceImpl implements IPostService
-{
+public class PostServiceImpl implements IPostService {
     @Autowired
     private PostMapper postMapper;
 
@@ -27,12 +26,12 @@ public class PostServiceImpl implements IPostService
     /**
      * 查询岗位信息集合
      * 
-     * @param post 岗位信息
+     * @param post
+     *            岗位信息
      * @return 岗位信息集合
      */
     @Override
-    public List<Post> selectPostList(Post post)
-    {
+    public List<Post> selectPostList(Post post) {
         return postMapper.selectPostList(post);
     }
 
@@ -42,28 +41,24 @@ public class PostServiceImpl implements IPostService
      * @return 岗位列表
      */
     @Override
-    public List<Post> selectPostAll()
-    {
+    public List<Post> selectPostAll() {
         return postMapper.selectPostAll();
     }
 
     /**
      * 根据用户ID查询岗位
      * 
-     * @param userId 用户ID
+     * @param userId
+     *            用户ID
      * @return 岗位列表
      */
     @Override
-    public List<Post> selectPostsByUserId(Long userId)
-    {
+    public List<Post> selectPostsByUserId(Long userId) {
         List<Post> userPosts = postMapper.selectPostsByUserId(userId);
         List<Post> posts = postMapper.selectPostAll();
-        for (Post post : posts)
-        {
-            for (Post userRole : userPosts)
-            {
-                if (post.getPostId().longValue() == userRole.getPostId().longValue())
-                {
+        for (Post post : posts) {
+            for (Post userRole : userPosts) {
+                if (post.getPostId().longValue() == userRole.getPostId().longValue()) {
                     post.setFlag(true);
                     break;
                 }
@@ -75,30 +70,28 @@ public class PostServiceImpl implements IPostService
     /**
      * 通过岗位ID查询岗位信息
      * 
-     * @param postId 岗位ID
+     * @param postId
+     *            岗位ID
      * @return 角色对象信息
      */
     @Override
-    public Post selectPostById(Long postId)
-    {
+    public Post selectPostById(Long postId) {
         return postMapper.selectPostById(postId);
     }
 
     /**
      * 批量删除岗位信息
      * 
-     * @param ids 需要删除的数据ID
+     * @param ids
+     *            需要删除的数据ID
      * @throws Exception
      */
     @Override
-    public int deletePostByIds(String ids) throws Exception
-    {
+    public int deletePostByIds(String ids) throws Exception {
         Long[] postIds = Convert.toLongArray(ids);
-        for (Long postId : postIds)
-        {
+        for (Long postId : postIds) {
             Post post = selectPostById(postId);
-            if (countUserPostById(postId) > 0)
-            {
+            if (countUserPostById(postId) > 0) {
                 throw new Exception(String.format("%1$s已分配,不能删除", post.getPostName()));
             }
         }
@@ -108,12 +101,12 @@ public class PostServiceImpl implements IPostService
     /**
      * 新增保存岗位信息
      * 
-     * @param post 岗位信息
+     * @param post
+     *            岗位信息
      * @return 结果
      */
     @Override
-    public int insertPost(Post post)
-    {
+    public int insertPost(Post post) {
         post.setCreateBy(ShiroUtils.getLoginName());
         return postMapper.insertPost(post);
     }
@@ -121,12 +114,12 @@ public class PostServiceImpl implements IPostService
     /**
      * 修改保存岗位信息
      * 
-     * @param post 岗位信息
+     * @param post
+     *            岗位信息
      * @return 结果
      */
     @Override
-    public int updatePost(Post post)
-    {
+    public int updatePost(Post post) {
         post.setUpdateBy(ShiroUtils.getLoginName());
         return postMapper.updatePost(post);
     }
@@ -134,28 +127,27 @@ public class PostServiceImpl implements IPostService
     /**
      * 通过岗位ID查询岗位使用数量
      * 
-     * @param postId 岗位ID
+     * @param postId
+     *            岗位ID
      * @return 结果
      */
     @Override
-    public int countUserPostById(Long postId)
-    {
+    public int countUserPostById(Long postId) {
         return userPostMapper.countUserPostById(postId);
     }
 
     /**
      * 校验岗位名称是否唯一
      * 
-     * @param post 岗位信息
+     * @param post
+     *            岗位信息
      * @return 结果
      */
     @Override
-    public String checkPostNameUnique(Post post)
-    {
+    public String checkPostNameUnique(Post post) {
         Long postId = StringUtils.isNull(post.getPostId()) ? -1L : post.getPostId();
         Post info = postMapper.checkPostNameUnique(post.getPostName());
-        if (StringUtils.isNotNull(info) && info.getPostId().longValue() != postId.longValue())
-        {
+        if (StringUtils.isNotNull(info) && info.getPostId().longValue() != postId.longValue()) {
             return UserConstants.POST_NAME_NOT_UNIQUE;
         }
         return UserConstants.POST_NAME_UNIQUE;
@@ -164,16 +156,15 @@ public class PostServiceImpl implements IPostService
     /**
      * 校验岗位编码是否唯一
      * 
-     * @param post 岗位信息
+     * @param post
+     *            岗位信息
      * @return 结果
      */
     @Override
-    public String checkPostCodeUnique(Post post)
-    {
+    public String checkPostCodeUnique(Post post) {
         Long postId = StringUtils.isNull(post.getPostId()) ? -1L : post.getPostId();
         Post info = postMapper.checkPostCodeUnique(post.getPostCode());
-        if (StringUtils.isNotNull(info) && info.getPostId().longValue() != postId.longValue())
-        {
+        if (StringUtils.isNotNull(info) && info.getPostId().longValue() != postId.longValue()) {
             return UserConstants.POST_CODE_NOT_UNIQUE;
         }
         return UserConstants.POST_CODE_UNIQUE;

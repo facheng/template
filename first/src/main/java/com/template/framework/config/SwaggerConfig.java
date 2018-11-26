@@ -18,8 +18,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
  */
 @Configuration
 @EnableSwagger2
-public class SwaggerConfig
-{
+public class SwaggerConfig {
     /** 系统基础配置 */
     @Autowired
     private ProjectConfig projectConfig;
@@ -28,30 +27,23 @@ public class SwaggerConfig
      * 创建API
      */
     @Bean
-    public Docket createRestApi()
-    {
+    public Docket createRestApi() {
         return new Docket(DocumentationType.SWAGGER_2)
                 // 详细定制
-                .apiInfo(apiInfo())
-                .select()
+                .apiInfo(apiInfo()).select()
                 // 指定当前包路径
                 .apis(RequestHandlerSelectors.basePackage("com.template.project.tool.swagger"))
                 // 扫描所有 .apis(RequestHandlerSelectors.any())
-                .paths(PathSelectors.any())
-                .build();
+                .paths(PathSelectors.any()).build();
     }
 
     /**
      * 添加摘要信息
      */
-    private ApiInfo apiInfo()
-    {
+    private ApiInfo apiInfo() {
         // 用ApiInfoBuilder进行定制
-        return new ApiInfoBuilder()
-                .title("标题：后台管理系统_接口文档")
-                .description("描述：用于管理集团旗下公司的人员信息,具体包括XXX,XXX模块...")
-                .contact(new Contact(projectConfig.getName(), null, null))
-                .version("版本号:" + projectConfig.getVersion())
+        return new ApiInfoBuilder().title("标题：后台管理系统_接口文档").description("描述：用于管理集团旗下公司的人员信息,具体包括XXX,XXX模块...")
+                .contact(new Contact(projectConfig.getName(), null, null)).version("版本号:" + projectConfig.getVersion())
                 .build();
     }
 }

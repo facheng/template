@@ -12,12 +12,11 @@ import com.template.framework.web.controller.BaseController;
  */
 @Controller
 @RequestMapping("/tool/swagger")
-public class SwaggerController extends BaseController
-{
+public class SwaggerController extends BaseController {
+
     @RequiresPermissions("tool:swagger:view")
     @GetMapping()
-    public String index()
-    {
+    public String index() {
         return redirect("/swagger-ui.html");
     }
 }

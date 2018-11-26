@@ -7,13 +7,11 @@ import com.template.common.constant.Constants;
  * 表格数据处理
  * 
  */
-public class TableSupport
-{
+public class TableSupport {
     /**
      * 封装分页对象
      */
-    public static PageDomain getPageDomain()
-    {
+    public static PageDomain getPageDomain() {
         PageDomain pageDomain = new PageDomain();
         pageDomain.setPageNum(ServletUtils.getParameterToInt(Constants.PAGE_NUM));
         pageDomain.setPageSize(ServletUtils.getParameterToInt(Constants.PAGE_SIZE));
@@ -22,8 +20,7 @@ public class TableSupport
         return pageDomain;
     }
 
-    public static PageDomain buildPageRequest()
-    {
+    public static PageDomain buildPageRequest() {
         return getPageDomain();
     }
 

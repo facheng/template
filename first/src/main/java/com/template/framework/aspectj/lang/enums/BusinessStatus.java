@@ -5,8 +5,7 @@ package com.template.framework.aspectj.lang.enums;
  * 
  *
  */
-public enum BusinessStatus
-{
+public enum BusinessStatus {
     /**
      * 成功
      */
