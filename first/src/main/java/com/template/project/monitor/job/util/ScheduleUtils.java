@@ -12,6 +12,7 @@ import org.quartz.TriggerBuilder;
 import org.quartz.TriggerKey;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 import com.template.common.constant.ScheduleConstants;
 import com.template.common.exception.job.TaskException;
 import com.template.common.exception.job.TaskException.Code;
@@ -64,7 +65,7 @@ public class ScheduleUtils {
 
             // 按新的cronExpression表达式构建一个新的trigger
             CronTrigger trigger = TriggerBuilder.newTrigger().withIdentity(getTriggerKey(job.getJobId()))
-                    .withSchedule(cronScheduleBuilder).build();
+                    .withSchedule(cronScheduleBuilder).usingJobData("test", "1").build();
 
             // 放入参数，运行时的方法可以获取
             jobDetail.getJobDataMap().put(ScheduleConstants.TASK_PROPERTIES, job);

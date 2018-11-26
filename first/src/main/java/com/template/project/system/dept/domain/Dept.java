@@ -36,7 +36,7 @@ public class Dept extends BaseEntity {
     private String email;
 
     /** 部门状态:0正常,1停用 */
-    private Integer status;
+    private String status;
 
     /** 删除标志（0代表存在 2代表删除） */
     private String delFlag;
@@ -108,11 +108,11 @@ public class Dept extends BaseEntity {
         this.email = email;
     }
 
-    public Integer getStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(Integer status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 

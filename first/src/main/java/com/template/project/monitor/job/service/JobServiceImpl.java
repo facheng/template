@@ -20,6 +20,7 @@ import com.template.project.monitor.job.util.ScheduleUtils;
  */
 @Service
 public class JobServiceImpl implements IJobService {
+
     @Autowired
     private Scheduler scheduler;
 
@@ -29,7 +30,7 @@ public class JobServiceImpl implements IJobService {
     /**
      * 项目启动时，初始化定时器
      */
-    // @PostConstruct
+    @PostConstruct
     public void init() {
         List<Job> jobList = jobMapper.selectJobAll();
         for (Job job : jobList) {

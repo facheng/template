@@ -1,10 +1,12 @@
 package com.template.framework.config;
 
+import java.util.Properties;
+
+import javax.sql.DataSource;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.quartz.SchedulerFactoryBean;
-import javax.sql.DataSource;
-import java.util.Properties;
 
 /**
  * 定时任务配置
@@ -12,6 +14,7 @@ import java.util.Properties;
  */
 @Configuration
 public class ScheduleConfig {
+
     @Bean
     public SchedulerFactoryBean schedulerFactoryBean(DataSource dataSource) {
         SchedulerFactoryBean factory = new SchedulerFactoryBean();
@@ -33,11 +36,15 @@ public class ScheduleConfig {
         prop.put("org.quartz.jobStore.maxMisfiresToHandleAtATime", "1");
         prop.put("org.quartz.jobStore.txIsolationLevelSerializable", "true");
 
-        // sqlserver 启用
-        // prop.put("org.quartz.jobStore.selectWithLockSQL", "SELECT * FROM
-        // {0}LOCKS UPDLOCK WHERE LOCK_NAME = ?");
+        // 集群使用db悲观锁实现分布式锁
+        prop.put("org.quartz.jobStore.selectWithLockSQL", "SELECT * FROM {0}LOCKS UPDLOCK WHERE LOCK_NAME = ?");
+
         prop.put("org.quartz.jobStore.misfireThreshold", "12000");
         prop.put("org.quartz.jobStore.tablePrefix", "QRTZ_");
+
+        // 针对PostgreSQL数据库
+        prop.put("org.quartz.jobStore.driverDelegateClass", "org.quartz.impl.jdbcjobstore.PostgreSQLDelegate");
+
         factory.setQuartzProperties(prop);
 
         factory.setSchedulerName("ProjectScheduler");
