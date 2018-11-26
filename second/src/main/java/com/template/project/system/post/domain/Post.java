@@ -26,7 +26,7 @@ public class Post extends BaseEntity {
 
     /** 岗位排序 */
     @Excel(name = "岗位排序")
-    private String postSort;
+    private Integer postSort;
 
     /** 状态（0正常 1停用） */
     @Excel(name = "状态", readConverterExp = "0=正常,1=停用")
@@ -59,11 +59,11 @@ public class Post extends BaseEntity {
         this.postName = postName;
     }
 
-    public String getPostSort() {
+    public Integer getPostSort() {
         return postSort;
     }
 
-    public void setPostSort(String postSort) {
+    public void setPostSort(Integer postSort) {
         this.postSort = postSort;
     }
 
