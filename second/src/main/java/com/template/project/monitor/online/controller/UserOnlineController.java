@@ -94,7 +94,7 @@ public class UserOnlineController extends BaseController {
         }
         onlineSession.setStatus(OnlineSession.OnlineStatus.off_line);
         online.setStatus(OnlineSession.OnlineStatus.off_line);
-        userOnlineService.saveOnline(online);
+        userOnlineService.forceLogout(sessionId);
         return success();
     }
 }
