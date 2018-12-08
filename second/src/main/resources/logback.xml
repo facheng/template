@@ -69,6 +69,8 @@
 
     <logger name="com.template" level="info"/>
 
+    <logger name="dao" level="debug"/>
+
     <root level="info">
         <appender-ref ref="console"/>
     </root>
