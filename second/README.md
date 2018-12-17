@@ -4,10 +4,10 @@
     
 - pom文件修改
 
-    #####改为war形式
+    ##### 改为war形式
     <pre><code>&lt;packaging>war&lt;/packaging></code></pre>
 
-    ##### springboot版本降到 1.x，排除掉所有动态注册servlet和filter的代码，servlet3.0以上才支持动态注册
+    ##### springboot版本降到 1.x，排除掉所有动态注册servlet和filter的代码，servlet3.0以上才支持动态注册
         <parent>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-parent</artifactId>
@@ -108,7 +108,7 @@
             <version>${guava.version}</version>
         </dependency>
 - 添加web.xml
-  ##### 不添加web.xml文件，直接把war包放到jetty7的webapps目录下的话，jetty不认为这是一个web工程，通过浏览器访问时，jetty会将相应的目录信息展示到浏览器中。
+  ##### 如果不添加web.xml文件，直接把war包放到jetty7的webapps目录下的话，jetty不认为这是一个web工程，通过浏览器访问时，jetty会将相应的目录信息展示到浏览器中。
 
   ##### 由于servlet2.5不支持动态创建servlet，需要显示指定DispatcherServlet和项目中所用到的Filter。在src/main下创建webapp/WEN-INF目录，在该目录下创建web.xml文件
         <?xml version="1.0" encoding="UTF-8"?>
