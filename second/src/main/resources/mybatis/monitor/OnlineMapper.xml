@@ -66,4 +66,21 @@
         WHERE o.last_access_time <![CDATA[ <= ]]> #{lastAccessTime} ORDER BY o.last_access_time ASC
     </select>
 
+    <update id="updateUserOnline" parameterType="UserOnline">
+        update sys_user_online
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="loginName != null  and loginName != ''  ">login_name = #{loginName},</if>
+            <if test="deptName != null  and deptName != ''  ">dept_name = #{deptName},</if>
+            <if test="ipaddr != null  and ipaddr != ''  ">ipaddr = #{ipaddr},</if>
+            <if test="loginLocation != null  and loginLocation != ''  ">login_location = #{loginLocation},</if>
+            <if test="browser != null  and browser != ''  ">browser = #{browser},</if>
+            <if test="os != null  and os != ''  ">os = #{os},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="startTimestamp != null  ">start_timestamp = #{startTimestamp},</if>
+            <if test="lastAccessTime != null  ">last_access_time = #{lastAccessTime},</if>
+            <if test="expireTime != null  ">expire_time = #{expireTime},</if>
+        </trim>
+        where sessionid = #{sessionId}
+    </update>
+
 </mapper> 

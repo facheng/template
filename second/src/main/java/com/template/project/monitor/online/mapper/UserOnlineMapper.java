@@ -2,6 +2,7 @@ package com.template.project.monitor.online.mapper;
 
 import java.util.Date;
 import java.util.List;
+
 import com.template.project.monitor.online.domain.UserOnline;
 
 /**
@@ -53,4 +54,13 @@ public interface UserOnlineMapper {
      * @return 会话集合
      */
     public List<UserOnline> selectOnlineByExpired(Date lastAccessTime);
+
+    /**
+     * 修改在线用户记录
+     *
+     * @param userOnline
+     *            在线用户记录信息
+     * @return 结果
+     */
+    int updateUserOnline(UserOnline userOnline);
 }

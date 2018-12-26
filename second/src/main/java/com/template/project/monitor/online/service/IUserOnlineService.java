@@ -69,4 +69,13 @@ public interface IUserOnlineService {
      * @return 会话集合
      */
     public List<UserOnline> selectOnlineByExpired(Date expiredDate);
+
+    /**
+     * 修改在线用户记录
+     *
+     * @param userOnline
+     *            在线用户记录信息
+     * @return 结果
+     */
+    int updateUserOnline(UserOnline userOnline);
 }

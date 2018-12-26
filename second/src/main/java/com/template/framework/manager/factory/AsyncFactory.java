@@ -26,7 +26,7 @@ import eu.bitwalker.useragentutils.UserAgent;
  * 
  */
 public class AsyncFactory {
-    private static final Logger sys_user_logger = LoggerFactory.getLogger("sys-user");
+    private static final Logger LOGGER = LoggerFactory.getLogger(AsyncFactory.class);
 
     /**
      * 同步session到数据库
@@ -52,7 +52,14 @@ public class AsyncFactory {
                 online.setOs(session.getOs());
                 online.setStatus(session.getStatus());
                 online.setSession(session);
-                SpringUtils.getBean(IUserOnlineService.class).saveOnline(online);
+                LOGGER.info("start syncSessionToDb for user name {}", session.getLoginName());
+
+                IUserOnlineService userOnlineService = SpringUtils.getBean(IUserOnlineService.class);
+                if (userOnlineService.selectOnlineById(online.getSessionId()) != null) {
+                    userOnlineService.updateUserOnline(online);
+                } else {
+                    userOnlineService.saveOnline(online);
+                }
 
             }
         };

@@ -115,4 +115,9 @@ public class UserOnlineServiceImpl implements IUserOnlineService {
     public List<UserOnline> selectOnlineByExpired(Date expiredDate) {
         return userOnlineDao.selectOnlineByExpired(expiredDate);
     }
+
+    @Override
+    public int updateUserOnline(UserOnline userOnline) {
+        return userOnlineDao.updateUserOnline(userOnline);
+    }
 }
