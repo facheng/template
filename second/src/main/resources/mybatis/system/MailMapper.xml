@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.template.project.mail.mapper.MailMapper">
+	<insert id="store" parameterType="com.template.project.mail.domain.Mail"
+		useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO sys_email(
+		version,
+		created_at, send_at, subject, recipient, mail_body, reply_to_name,
+		reply_to_address, from_name, from_address
+		)
+		VALUES(
+		#{version},
+		#{createdAt}, #{sendAt}, #{subject}, #{recipient}, #{mailBody},
+		#{replyToName}, #{replyToAddress},
+		#{fromName}, #{fromAddress}
+		)
+	</insert>
+
+	<select id="getMailBatch" parameterType="java.util.Map"
+		resultMap="mail">
+		SELECT * FROM sys_email WHERE send_at IS NULL AND
+		created_at &lt; #{startTime} ORDER BY created_at
+	</select>
+
+	<delete id="removeOldMails" parameterType="java.util.Map">
+		DELETE FROM
+		sys_email WHERE send_at &lt; #{startTime}
+	</delete>
+
+	<update id="removeMailsBody" parameterType="java.util.Map">
+		UPDATE
+		sys_email SET
+		mail_body = '' WHERE send_at &lt; #{startTime}
+	</update>
+
+	<select id="getMail" parameterType="Long" resultMap="mail">
+		SELECT *
+		FROM sys_email WHERE id = #{id}
+	</select>
+
+	<update id="updateSendTime" parameterType="com.template.project.mail.domain.Mail">
+		UPDATE
+		sys_email SET send_at =
+		#{sendAt} WHERE id = ${id}
+	</update>
+
+	<resultMap type="com.template.project.mail.domain.Mail" id="mail">
+		<id property="id" column="id" />
+		<result property="version" column="version" />
+		<result property="createdAt" column="created_at" />
+		<result property="sendAt" column="send_at" />
+		<result property="subject" column="subject" />
+		<result property="recipient" column="recipient" />
+		<result property="mailBody" column="mail_body" />
+		<result property="replyToName" column="reply_to_name" />
+		<result property="replyToAddress" column="reply_to_address" />
+		<result property="fromName" column="from_name" />
+		<result property="fromAddress" column="from_address" />
+	</resultMap>
+
+</mapper>

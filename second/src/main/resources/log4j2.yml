@@ -1,0 +1,64 @@
+Configuration: 
+ Properties: 
+  Property: 
+   - 
+    name: layout
+    value: "%d %p %t %c - %m%n"
+   - 
+    name: log.path
+    value: /tmp/logs
+   - 
+    name: log.file
+    value: template-web
+   - 
+    name: error.log.file
+    value: template-web-error
+ Appenders: 
+  Console: 
+   PatternLayout: 
+    pattern: ${layout}
+   name: LOG_STDOUT
+   target: SYSTEMOUT
+  RollingRandomAccessFile: 
+   - 
+    PatternLayout: 
+     pattern: ${layout}
+    Policies: 
+     TimeBasedTriggeringPolicy: 
+      interval: 1
+      modulate: true
+    name: mq_DailyRollingFile
+    fileName: ${log.path}/${log.file}.log
+    filePattern: ${log.path}/${log.file}.%d{yyyy-MM-dd}.log
+    immediateFlush: true
+   - 
+    PatternLayout: 
+     pattern: ${layout}
+    Policies: 
+     TimeBasedTriggeringPolicy: 
+      interval: 1
+      modulate: true
+    ThresholdFilter: 
+     level: ERROR
+     onMatch: ACCEPT
+     onMismatch: DENY
+    name: error_DailyRollingFile
+    fileName: ${log.path}/${error.log.file}.log
+    filePattern: ${log.path}/${error.log.file}.%d{yyyy-MM-dd}.log
+    immediateFlush: true
+ Loggers: 
+  logger:
+  - name: com.otms
+    level: INFO
+  - name: com.mybatis
+    level: INFO
+    additivity: true
+    AppenderRef:
+     - ref: mq_DailyRollingFile
+
+  Root:
+   level: INFO
+   AppenderRef:
+    - ref: LOG_STDOUT
+    - ref: error_DailyRollingFile
+    - ref: mq_DailyRollingFile

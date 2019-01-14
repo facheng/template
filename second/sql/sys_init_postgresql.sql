@@ -727,3 +727,35 @@ SELECT setval('sys_dict_type_dict_id_seq',(SELECT max(dict_id) FROM sys_dict_typ
 SELECT setval('sys_dict_data_dict_code_seq',(SELECT max(dict_code) FROM sys_dict_data));
 SELECT setval('sys_config_config_id_seq',(SELECT max(config_id) FROM sys_config));
 SELECT setval('sys_job_job_id_seq',(SELECT max(job_id) FROM sys_job));
+
+
+DROP TABLE IF EXISTS sys_email CASCADE;
+CREATE TABLE IF NOT EXISTS sys_email(
+	id BIGINT NOT NULL,
+	version BIGINT,
+	created_at TIMESTAMP WITHOUT TIME ZONE,
+	send_at TIMESTAMP WITHOUT TIME ZONE,
+	subject text,
+	recipient text,
+	mail_body text,
+	reply_to_name text,
+	reply_to_address text,
+	from_name text,
+	from_address text,
+	CONSTRAINT wyeth_email_pkey PRIMARY KEY (id)
+);
+DROP SEQUENCE IF EXISTS seq_sys_email CASCADE;
+DO $$
+BEGIN
+  CREATE SEQUENCE seq_sys_email
+  INCREMENT 1
+  MINVALUE 1
+  MAXVALUE 9223372036854775807
+  START 1
+  CACHE 1;
+  EXCEPTION
+  WHEN DUPLICATE_TABLE THEN RAISE NOTICE 'Sequence[seq_sys_email] exists.';
+END;
+$$;
+ALTER TABLE WYETH_EMAIL ALTER COLUMN id SET DEFAULT NEXTVAL('seq_sys_email');
+
