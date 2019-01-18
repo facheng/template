@@ -12,7 +12,7 @@ import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
  * 
  */
 @SpringBootApplication(exclude = { DataSourceAutoConfiguration.class })
-@MapperScan("com.template.project.*.*.mapper")
+@MapperScan({ "com.template.project.*.*.mapper", "com.template.project.*.mapper" })
 public class Application extends SpringBootServletInitializer {
 
     @Override

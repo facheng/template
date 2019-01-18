@@ -6,9 +6,9 @@ spring:
         druid:
             # 主库数据源
             master:
-                url: jdbc:postgresql://localhost:5432/od
+                url: jdbc:postgresql://localhost-db:5432/od
                 username: jetty
-                password: jetty
+                password: 3plus8is11
             # 从库数据源
             slave:
                 # 从数据源开关/默认关闭

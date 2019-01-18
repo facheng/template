@@ -59,4 +59,14 @@ public class Constants {
      * 排序的方向 "desc" 或者 "asc".
      */
     public static String IS_ASC = "isAsc";
+
+    /**
+     * 实时天气
+     */
+    public static String WEATHER_NOW_URL_KEY = "weather.now.url";
+
+    /**
+     * 生活指数
+     */
+    public static String WEATHER_LIFESTYLE_URL_KEY = "weather.lifestyle.url";
 }

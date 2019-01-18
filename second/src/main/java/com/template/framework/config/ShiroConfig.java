@@ -76,6 +76,12 @@ public class ShiroConfig {
     private String unauthorizedUrl;
 
     /**
+     * 不需要权限认证的url
+     */
+    @Value("${shiro.authenticate.exclude.urls}")
+    private String authenticateExcludeUrls;
+
+    /**
      * 缓存管理器 使用Ehcache实现
      */
     @Bean
@@ -238,6 +244,13 @@ public class ShiroConfig {
         filterChainDefinitionMap.put("/login", "anon,captchaValidate");
         // 系统权限列表
         // filterChainDefinitionMap.putAll(SpringUtils.getBean(IMenuService.class).selectPermsAll());
+
+        String[] authenticateExcludeArr = StringUtils.split(authenticateExcludeUrls, ",");
+        if (authenticateExcludeArr != null && authenticateExcludeArr.length > 0) {
+            for (String exclude : authenticateExcludeArr) {
+                filterChainDefinitionMap.put(exclude.trim(), "anon");
+            }
+        }
 
         Map<String, Filter> filters = new LinkedHashMap<>();
         filters.put("onlineSession", onlineSessionFilter());

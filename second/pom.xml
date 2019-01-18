@@ -6,7 +6,7 @@
 	<groupId>com.template</groupId>
 	<artifactId>template</artifactId>
 	<version>1.0.0</version>
-	<packaging>jar</packaging>
+	<packaging>war</packaging>
 
 	<name>template</name>
 	<description>管理系统</description>
@@ -74,18 +74,18 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
-			<exclusions>
-				<exclusion>
-					<groupId>org.springframework.boot</groupId>
-					<artifactId>spring-boot-starter-tomcat</artifactId>
-				</exclusion>
-			</exclusions>
+			<!--<exclusions>-->
+				<!--<exclusion>-->
+					<!--<groupId>org.springframework.boot</groupId>-->
+					<!--<artifactId>spring-boot-starter-tomcat</artifactId>-->
+				<!--</exclusion>-->
+			<!--</exclusions>-->
 		</dependency>
 
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-jetty</artifactId>
-		</dependency>
+		<!--<dependency>-->
+			<!--<groupId>org.springframework.boot</groupId>-->
+			<!--<artifactId>spring-boot-starter-jetty</artifactId>-->
+		<!--</dependency>-->
 
 		<!-- SpringBoot集成thymeleaf模板 -->
 		<dependency>
@@ -331,13 +331,13 @@
 					</resource>
 				</resources>
 			</build>
-			<dependencies>
-				<dependency>
-					<groupId>org.springframework.boot</groupId>
-					<artifactId>spring-boot-starter-jetty</artifactId>
-					<scope>provided</scope>
-				</dependency>
-			</dependencies>
+			<!--<dependencies>-->
+				<!--<dependency>-->
+					<!--<groupId>org.springframework.boot</groupId>-->
+					<!--<artifactId>spring-boot-starter-jetty</artifactId>-->
+					<!--<scope>provided</scope>-->
+				<!--</dependency>-->
+			<!--</dependencies>-->
 		</profile>
 	</profiles>
 
