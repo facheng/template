@@ -15,6 +15,6 @@ App({
     wx.setStorageSync(id, val);//API：设置本地缓存
   },
   //自定义全局属性
-  curid: "CN101010100",
+  curid: "CN101020100",
   version: "1.0"
 })

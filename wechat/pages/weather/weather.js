@@ -10,7 +10,7 @@ Page({
     that.getnow(function (d) {//获取到数据的回调函数
       wx.hideToast();
       d.now.cond_src = "https://cdn.heweather.com/cond_icon/" + d.now.cond_code + ".png";
-      that.setData({ basic: d.basic, now: d.now })//更新数据，视图将同步更新
+      that.setData({ basic: d.basic, now: d.now, update: d.update })//更新数据，视图将同步更新
     })
     that.getsuggestion(function (d) {
       that.setData({ suggestion: d.lifestyle })//更新数据
@@ -19,19 +19,19 @@ Page({
   //3、自定义页面方法：获取当前天气API
   getnow: function (fn) {
     wx.request({//请求服务器，类似ajax
-      url: 'https://free-api.heweather.net/s6/weather/now',
-      data: { location: app.curid, key: '946e19f84f04406188f9bd4ccc6ffe66' },//和风天气提供用户key，可自行注册获得
+      url: 'http://www.miaoge.club/v1/weather/now',
+      data: { location: app.curid},//和风天气提供用户key，可自行注册获得
       header: { 'Content-Type': 'application/json' },
-      success: function (res) { fn(res.data.HeWeather6[0]); }//成功后将数据传给回调函数执行
+      success: function (res) { fn(res.data.weatherDetails[0]); }//成功后将数据传给回调函数执行
     })
   },
   //获取生活指数API
   getsuggestion: function (fn) {
     wx.request({
-      url: 'https://free-api.heweather.net/s6/weather/lifestyle',
-      data: { location: app.curid, key: '946e19f84f04406188f9bd4ccc6ffe66' },
+      url: 'http://www.miaoge.club/v1/weather/lifestyle',
+      data: { location: app.curid},
       header: { 'Content-Type': 'application/json' },
-      success: function (res) { fn(res.data.HeWeather6[0]); }
+      success: function (res) { fn(res.data.weatherDetails[0]); }
     })
   },
   //4、页面事件绑定部分
