@@ -742,7 +742,7 @@ CREATE TABLE IF NOT EXISTS sys_email(
 	reply_to_address text,
 	from_name text,
 	from_address text,
-	CONSTRAINT wyeth_email_pkey PRIMARY KEY (id)
+	CONSTRAINT sys_email_pkey PRIMARY KEY (id)
 );
 DROP SEQUENCE IF EXISTS seq_sys_email CASCADE;
 DO $$
@@ -757,5 +757,5 @@ BEGIN
   WHEN DUPLICATE_TABLE THEN RAISE NOTICE 'Sequence[seq_sys_email] exists.';
 END;
 $$;
-ALTER TABLE WYETH_EMAIL ALTER COLUMN id SET DEFAULT NEXTVAL('seq_sys_email');
+ALTER TABLE sys_email ALTER COLUMN id SET DEFAULT NEXTVAL('seq_sys_email');
 
