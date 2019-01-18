@@ -97,6 +97,10 @@ shiro:
     captchaEnabled: false
     # 验证码类型 math 数组计算 char 字符
     captchaType: math
+
+  authenticate:
+      exclude:
+        urls: /v1/weather/**
   cookie:
     # 设置Cookie的域名 默认空，即当前访问的域名
     domain: 
@@ -145,3 +149,8 @@ mailer:
     password: xx
     httpClientTimeout: 30
   useSendCloud: true
+
+
+weather:
+     request:
+          key: 946e19f84f04406188f9bd4ccc6ffe66

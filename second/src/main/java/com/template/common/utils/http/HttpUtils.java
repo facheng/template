@@ -10,12 +10,17 @@ import java.net.SocketTimeoutException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.security.cert.X509Certificate;
+import java.util.Map;
+
 import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.SSLSession;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
+
+import org.apache.commons.collections.MapUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -25,6 +30,20 @@ import org.slf4j.LoggerFactory;
  */
 public class HttpUtils {
     private static final Logger log = LoggerFactory.getLogger(HttpUtils.class);
+
+    public static String sendGet(String url, Map<String, Object> params) {
+
+        StringBuilder sb = new StringBuilder(StringUtils.EMPTY);
+        if (MapUtils.isNotEmpty(params)) {
+            for (Map.Entry<String, Object> entry : params.entrySet())
+                sb.append(entry.getKey()).append("=").append(entry.getValue()).append("&");
+        }
+
+        String param = sb.toString();
+        param = StringUtils.removeEnd(param, "&");
+
+        return sendGet(url, param);
+    }
 
     /**
      * 向指定 URL 发送GET方法的请求

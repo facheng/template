@@ -555,6 +555,9 @@ comment     on     column     sys_config.remark      is    '备注';
 insert into sys_config values(1, '主框架页-默认皮肤样式名称', 'sys.index.skinName',     'skin-default',  'Y', 'admin', now(), 'admin', now(), '默认 skin-default、蓝色 skin-blue、黄色 skin-yellow' );
 insert into sys_config values(2, '用户管理-账号初始密码',     'sys.user.initPassword',  '123456',        'Y', 'admin', now(), 'admin', now(), '初始化密码 123456' );
 
+insert into sys_config values(3, '实时天气访问地址',     'weather.now.url',  'https://free-api.heweather.net/s6/weather/now',        'Y', 'admin', now(), 'admin', now(), '实时天气访问地址' );
+insert into sys_config values(4, '生活指数访问地址',     'weather.lifestyle.url',  'https://free-api.heweather.net/s6/weather/lifestyle',        'Y', 'admin', now(), 'admin', now(), '生活指数访问地址' );
+
 
 -- ----------------------------
 -- 14、系统访问记录
