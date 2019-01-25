@@ -50,7 +50,7 @@ public class HttpClientUtil {
         try {
             return EntityUtils.toString(response.getEntity(), Consts.UTF_8);
         } catch (IOException e) {
-            throw new HybridClientUtilException("Failed to parse http response: " + response.toString(), e);
+            throw new HttpClientUtilException("Failed to parse http response: " + response.toString(), e);
         }
     }
 
@@ -63,12 +63,12 @@ public class HttpClientUtil {
             response.setEntity(new BufferedHttpEntity(response.getEntity()));
             LOGGER.info("<< {}", getTrace(id, response));
             if (HttpStatus.SC_OK != status.getStatusCode()) {
-                throw new HybridClientUtilException(
+                throw new HttpClientUtilException(
                         MessageFormat.format("Http status {0} {1}", status.getStatusCode(), status.getReasonPhrase()));
             }
             return response;
         } catch (IOException e) {
-            throw new HybridClientUtilException("Failed to call http request: " + request.toString(), e);
+            throw new HttpClientUtilException("Failed to call http request: " + request.toString(), e);
         }
     }
 
