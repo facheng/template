@@ -7,7 +7,7 @@
   "window": {
     "navigationBarBackgroundColor": "#000",
     "navigationBarTitleText": "实时天气",
-    "navigationBarTextStyle": "#fff",
+    "navigationBarTextStyle": "white",
     "backgroundColor": "#666",
     "backgroundTextStyle": "light",
     "enablePullDownRefresh": true

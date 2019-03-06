@@ -19,7 +19,7 @@ Page({
     //3、自定义页面方法：获取当前天气API
     getnow: function(fn) {
         wx.request({ //请求服务器，类似ajax
-            url: 'http://www.miaoge.club/v1/weather/now',
+            url: 'https://www.miaoge.club/v1/weather/now',
             data: { location: app.curid }, //和风天气提供用户key，可自行注册获得
             header: { 'Content-Type': 'application/json' },
             success: function(res) { fn(res.data.weatherDetails[0]); } //成功后将数据传给回调函数执行
@@ -28,7 +28,7 @@ Page({
     //获取生活指数API
     getsuggestion: function(fn) {
         wx.request({
-            url: 'http://www.miaoge.club/v1/weather/lifestyle',
+            url: 'https://www.miaoge.club/v1/weather/lifestyle',
             data: { location: app.curid },
             header: { 'Content-Type': 'application/json' },
             success: function(res) { fn(res.data.weatherDetails[0]); }
